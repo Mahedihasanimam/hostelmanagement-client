@@ -12,40 +12,40 @@ const Navbar = () => {
   };
   const navigation = (
     <>
-      <li className="text-sm text-[#3B82F6]  font-semibold ">
+      <li className="text-lg   font-semibold ">
         <NavLink
           className={({ isActive }) =>
-            isActive ? "active bg-blue-400 text-[#3B82F6] " : " text-blue-400"
+            isActive ? "bg-[#3B82F6] text-white" : " text-blue-400"
           }
           to={"/"}
         >
           Home
         </NavLink>
       </li>
-      <li className="text-sm font-semibold mr-2">
+      <li className="text-lg font-semibold mr-2">
         <NavLink
           className={({ isActive }) =>
-            isActive ? "active text-[#3B82F6] bg-base-100" : ""
+            isActive ? "bg-[#3B82F6] text-white" : ""
           }
           to={"/Meals"}
         >
           Meals
         </NavLink>
       </li>
-      <li className="text-sm font-semibold mr-2">
+      <li className="text-lg font-semibold mr-2">
         <NavLink
           className={({ isActive }) =>
-            isActive ? "active text-[#3B82F6] bg-base-100" : ""
+            isActive ? " bg-[#3B82F6] text-white " : ""
           }
           to={"/bemembar"}
         >
           Be a Member
         </NavLink>
       </li>
-      <li className="text-sm font-semibold mr-2">
+      <li className="text-lg font-semibold mr-2">
         <NavLink
           className={({ isActive }) =>
-            isActive ? "active text-[#3B82F6] bg-base-100" : ""
+            isActive ? "bg-[#3B82F6] text-white" : ""
           }
           to={"/allbemembar"}
         >
@@ -71,7 +71,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className=" bg-white z-50 w-full fixed top-0   shadow-md ">
+    <div className=" bg-white z-50 w-full fixed top-0   shadow-lg ">
       <div className="navbar flex container px-4 mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
