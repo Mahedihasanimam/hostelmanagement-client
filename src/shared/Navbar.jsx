@@ -105,12 +105,15 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{navigation}</ul>
         </div>
-        <div className="navbar-end">
+        <div className="navbar-end  ">
           {/* notification  */}
-          <IoIosNotificationsOutline
-            size={30}
+            <span className="relative mr-4">
+            <IoIosNotificationsOutline
+            size={35}
             className="mr-4 cursor-pointer"
           />
+          <span className="absolute -top-2 right-2">+1</span>
+            </span>
           <div>
             {user && (
               <div className="dropdown dropdown-end mr-4">
