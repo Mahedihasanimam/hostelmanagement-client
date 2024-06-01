@@ -9,6 +9,8 @@ import Member from "../pages/Member/Member";
 import Login from "../provider/Login";
 import Registation from "../provider/Registation";
 import MyProfile from "../components/MyProfile";
+import MealDetails from "../pages/Home/MealsByCategory/MealDetails";
+import { axiosCommon } from "../hooks/UseAxiosCommon";
 
   const router = createBrowserRouter([
     {
@@ -26,8 +28,9 @@ import MyProfile from "../components/MyProfile";
         }
         ,
         {
-          path:'/myprofile',
-          element:<MyProfile/>
+          path:'/details/:id',
+          element:<MealDetails/>,
+          loader:({params})=>axiosCommon(`/details/${params.id}`)
         }
     
         ,

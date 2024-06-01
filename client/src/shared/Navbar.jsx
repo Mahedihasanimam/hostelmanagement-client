@@ -114,7 +114,7 @@ const Navbar = () => {
         </div>
         <div className="navbar-end  ">
           {/* notification  */}
-          <span className="relative mr-4">
+          <span className="relative lg:mr-4 mr-0">
             <IoIosNotificationsOutline
               size={35}
               className="mr-4 cursor-pointer"

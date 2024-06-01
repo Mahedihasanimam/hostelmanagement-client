@@ -11,7 +11,7 @@ const Slider = ({image,title,text}) => {
             <div className='absolute text-center space-y-8 top-1/4 w-full px-4  text-white '>
                 <h1 className='lg:text-6xl md:text-4xl text-2xl  font-bold'>{title}</h1>
                 <p className="lg:w-1/2 mx-auto mb-8">{text}</p>
-              <div className=" relative  lg:w-2/3 md:w-10/12 w-full mx-auto ">
+              <div className=" relative container lg:w-2/3 md:w-10/12 w-full mx-auto ">
                 <input type="search" name="search" className="p-4 w-full  rounded-lg text-black " placeholder="search what you wnat " id="" 
                 
                 />

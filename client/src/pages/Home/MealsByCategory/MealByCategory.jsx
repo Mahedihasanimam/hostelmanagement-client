@@ -17,10 +17,10 @@ const allMeals=card.filter(item=>item.category==='allMeals')
 console.log(card);
 
   return (
-    <div className="my-8">
+    <div className="my-8 px-4">
       <div className="lg:w-1/2 mx-auto text-center my-6 space-y-2">
       <h1 className="text-4xl font-bold text-center">Meal by category</h1>
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere architecto enim quasi sed aliquam quia laudantium officia laborum quaerat consectetur!</p>
+      <p>Meals by Category" offers diverse options like Breakfast, Lunch, and Dinner. Each category features delicious meals with detailed descriptions!</p>
       </div>
       <Tabs >
         <div className="w-fit mx-auto ">
