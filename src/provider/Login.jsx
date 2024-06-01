@@ -71,7 +71,7 @@ const handlegoolelogin=()=>{
               >
                <img src={loginlogo} alt="" />
               </strong>
-   
+              <h3 className="text-lg font-bold text-[#3B82F6] "> Sign In</h3>
 
               <div className="relative flex items-center mt-6">
                 <span className="absolute">
@@ -134,8 +134,8 @@ const handlegoolelogin=()=>{
               )}
 
               <div className="mt-6">
-                <button className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
-                  Sign in
+                <button className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-[#3B82F6] rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                  Sign In
                 </button>
 
                 <p className="mt-4 text-center text-gray-600 dark:text-gray-400">

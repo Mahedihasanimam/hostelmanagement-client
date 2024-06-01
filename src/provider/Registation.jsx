@@ -4,9 +4,10 @@ import { MdAddPhotoAlternate } from "react-icons/md";
 // hoock form
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import image from '../assets/undraw_account_re_o7id.svg';
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
+import loginimage from "../assets/login_side_imag.svg";
+import reglogo from "../assets/logo.png"
 const Registation = () => {
     const navigate=useNavigate()
     const {createUser,logout}=useContext(AuthContext)
@@ -25,12 +26,12 @@ const Registation = () => {
     if (!emailRegex.test(email)) {
       return toast.error("please provide a valid email");
     }
-    const photo = data.photo;
+  
     const password = data.password;
     if (password.length < 6) {
       return toast.error("password should be up to 6 charecter");
     }
-    console.log(name, email, photo, password);
+   
     createUser(email,password)
     .then(result=>{
         toast.success('regesistration success')
@@ -48,33 +49,23 @@ const Registation = () => {
   return (
     <div className="flex  lg:flex-row md:flex-row flex-col justify-center items-center  mt-4">
       <div className="">
-        <img src={image} alt="" />
+        <img src={loginimage} alt="" />
       </div>
       <div className="lg:w-2/3 md:w-2/3">
         <section className="bg-transparent dark:bg-gray-900">
           <div className="container flex items-center justify-start min-h-screen px-6 mx-auto">
             <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-md">
               <div className="flex justify-center mx-auto">
-                <strong
-                  to={"/"}
-                  className=" font-bold lg:text-2xl text-xl text-wrap"
-                >
-                  <span className="text-[#3B82F6]">Register to Join Our MesFamily</span>
-                  </strong>
-                <hr />
+              <img src={reglogo} alt="" />
+               
               </div>
 
-              <div className="flex items-center justify-center mt-6">
-                <Link
-                  to={"/login"}
-                  className="w-1/3 pb-4 font-medium text-center text-gray-500 capitalize border-b dark:border-gray-400 dark:text-gray-300"
-                >
-                  sign in
-                </Link>
+              <div className="">
+              
 
                 <a
-                  href="#"
-                  className="w-1/3 pb-4 font-medium text-center text-gray-800 capitalize border-b-2 border-blue-500 dark:border-blue-400 dark:text-white"
+                 
+                  className="w-1/3 pb-4 font-bold text-[#3B82F6] text-center capitalize border-b-2 border-blue-500 dark:border-blue-400 dark:text-white"
                 >
                   sign up
                 </a>
@@ -138,24 +129,7 @@ const Registation = () => {
               {errors.email && (
                 <span className="text-red-500">This field is required</span>
               )}
-              <div className="relative flex items-center mt-8">
-                <span className="absolute ml-3">
-                  <strong className="w-6  h-6 mx-3 text-gray-300 dark:text-gray-500 ">
-                    <MdAddPhotoAlternate size={30} />
-                  </strong>
-                </span>
-
-                <input
-                  type="text"
-                  name="photo"
-                  placeholder="Photo Url"
-                  className="block w-full  py-3   border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                  {...register("photo", { required: true })}
-                />
-              </div>
-              {errors.photo && (
-                <span className="text-red-500">This field is required</span>
-              )}
+            
 
               <div className="relative flex items-center mt-4">
                 <span className="absolute">
