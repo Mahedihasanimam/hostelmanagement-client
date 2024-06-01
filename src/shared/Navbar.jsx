@@ -3,9 +3,18 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import { IoIosNotificationsOutline } from "react-icons/io";
 // import { AuthContext } from "../provider/AuthProvider";
+
+import { RxCross2 } from "react-icons/rx";
 import logo from "../assets/logo.png";
+import { GiHamburgerMenu } from "react-icons/gi";
+
+import AOS from "aos";
+import "aos/dist/aos.css"; // You can also use <link> for styles
+// ..
+AOS.init();
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
+  const [navOpen, setNavOpen] = useState(false);
 
   const handlelogout = () => {
     logout();
@@ -53,7 +62,6 @@ const Navbar = () => {
         </NavLink>
       </li>
 
-
       {/* {
         user && <li className="text-sm font-semibold">
         <NavLink
@@ -71,36 +79,34 @@ const Navbar = () => {
       } */}
     </>
   );
+  const handletoggle = (e) => {
+    e.preventDefault();
+    setNavOpen(!navOpen);
+  };
   return (
     <div className=" bg-black bg-opacity-75  text-white z-50 w-full fixed top-0   shadow-lg ">
       <div className="navbar flex container px-4 mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />
-              </svg>
+            <div
+              onClick={handletoggle}
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost lg:hidden"
+            >
+              {navOpen ? <RxCross2 size={25} /> : <GiHamburgerMenu size={25} />}
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[999] p-2 shadow bg-base-100 rounded-box w-52"
+              className={`menu h-screen text-black dropdown-content ${
+                navOpen ? "-ml-4" : "-ml-60  "
+              } transition-all ease-in-out duration-1000  mt-2  z-[999] p-2 shadow bg-base-100 rounded-sm  w-52`}
             >
               {navigation}
             </ul>
           </div>
           <Link to={"/"} className=" font-bold lg:text-2xl text-xl text-wrap">
-            <img className="h-11" src={logo} alt="" />
+            <img className="lg:w-1/2 md:w-1/2" src={logo} alt="" />
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
@@ -108,13 +114,15 @@ const Navbar = () => {
         </div>
         <div className="navbar-end  ">
           {/* notification  */}
-            <span className="relative mr-4">
+          <span className="relative mr-4">
             <IoIosNotificationsOutline
-            size={35}
-            className="mr-4 cursor-pointer"
-          />
-          <span className="absolute -top-2 right-2">+1</span>
-            </span>
+              size={35}
+              className="mr-4 cursor-pointer"
+            />
+            {/* <span className="absolute top-1 right-5 inline-flex rounded-full h-3 w-3 bg-sky-500"></span> */}
+            <span className="animate-ping absolute top-1 right-5 inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+            <span className="absolute top-1 right-5 inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
+          </span>
           <div>
             {user && (
               <div className="dropdown text-black dropdown-end mr-4">
@@ -129,11 +137,16 @@ const Navbar = () => {
                   tabIndex={0}
                   className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 space-y-2"
                 >
-                  <p  className="bg-[#3B82F6] rounded-md p-2 text-white font-bold">
+                  <p className="bg-[#3B82F6] rounded-md p-2 text-white font-bold">
                     <p>{user?.displayName}</p>
                   </p>
                   <li>
-                    <Link className="hover:bg-[#3B82F6] hover:text-white p-2 font-bold" to={"/myprofile"}>My profile</Link>
+                    <Link
+                      className="hover:bg-[#3B82F6] hover:text-white p-2 font-bold"
+                      to={"/myprofile"}
+                    >
+                      My profile
+                    </Link>
                   </li>
                   <li
                     onClick={handlelogout}
@@ -147,7 +160,7 @@ const Navbar = () => {
           </div>
           <Link className="" to={"/login"}>
             {!user && (
-              <button className="btn bg-[#3B82F6] hover:bg-[#3B82F6] border-none lg:px-8 text-white font-bold rounded-md text-lg">
+              <button className="btn bg-[#3B82F6] hover:bg-[#3B82F6] border-none lg:px-8 px-2 text-white font-bold rounded-md lg:text-lg text-xs">
                 Join With Us
               </button>
             )}
