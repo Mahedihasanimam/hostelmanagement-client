@@ -1,12 +1,13 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 // hoock form
 import { useForm } from "react-hook-form";
-import loginimage from "../assets/undraw_sign_in_re_o58h.svg";
 import { useContext } from "react";
 
 import toast from "react-hot-toast";
 import axios from "axios";
 import { AuthContext } from "./AuthProvider";
+import loginimage from "../assets/login_side_imag.svg";
+import loginlogo from "../assets/logo.png"
 
 
 const Login = () => {
@@ -57,7 +58,7 @@ const handlegoolelogin=()=>{
       <div className="">
         <img src={loginimage} alt="" />
       </div>
-      <div className="lg:w-2/3 md:w-2/3">
+      <div className="lg:w-1/2 md:w-2/3">
         <section className="  dark:bg-gray-900">
           <div className="container  flex items-center justify-start min-h-screen px-6 mx-auto ">
             <form
@@ -68,13 +69,9 @@ const handlegoolelogin=()=>{
                 to={"/"}
                 className=" font-bold lg:text-2xl text-xl text-wrap"
               >
-                <span className="text-[#3B82F6]">MesFamily</span>
+               <img src={loginlogo} alt="" />
               </strong>
-              <hr />
-
-              <h1 className="mt-3 text-2xl font-semibold  capitalize sm:text-3xl dark:text-white">
-                sign In
-              </h1>
+   
 
               <div className="relative flex items-center mt-6">
                 <span className="absolute">

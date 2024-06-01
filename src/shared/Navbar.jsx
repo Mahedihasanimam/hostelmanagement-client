@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import { IoIosNotificationsOutline } from "react-icons/io";
 // import { AuthContext } from "../provider/AuthProvider";
-import logo from "../assets/Minimal and Elegant Real Estate Logo Template.png";
+import logo from "../assets/logo.png";
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
 
@@ -15,7 +15,7 @@ const Navbar = () => {
       <li className="text-lg   font-semibold ">
         <NavLink
           className={({ isActive }) =>
-            isActive ? "bg-[#3B82F6] text-white" : " text-blue-400"
+            isActive ? "bg-[#3B82F6] text-white mr-2" : " text-blue-400"
           }
           to={"/"}
         >
@@ -35,6 +35,16 @@ const Navbar = () => {
       <li className="text-lg font-semibold mr-2">
         <NavLink
           className={({ isActive }) =>
+            isActive ? "bg-[#3B82F6] text-white" : ""
+          }
+          to={"/upcommingmeals"}
+        >
+          Upcoming Meals
+        </NavLink>
+      </li>
+      <li className="text-lg font-semibold mr-2">
+        <NavLink
+          className={({ isActive }) =>
             isActive ? " bg-[#3B82F6] text-white " : ""
           }
           to={"/bemembar"}
@@ -42,16 +52,7 @@ const Navbar = () => {
           Be a Member
         </NavLink>
       </li>
-      <li className="text-lg font-semibold mr-2">
-        <NavLink
-          className={({ isActive }) =>
-            isActive ? "bg-[#3B82F6] text-white" : ""
-          }
-          to={"/allbemembar"}
-        >
-          All Member
-        </NavLink>
-      </li>
+
 
       {/* {
         user && <li className="text-sm font-semibold">
@@ -71,7 +72,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className=" bg-white z-50 w-full fixed top-0   shadow-lg ">
+    <div className=" bg-black bg-opacity-75  text-white z-50 w-full fixed top-0   shadow-lg ">
       <div className="navbar flex container px-4 mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
@@ -116,7 +117,7 @@ const Navbar = () => {
             </span>
           <div>
             {user && (
-              <div className="dropdown dropdown-end mr-4">
+              <div className="dropdown text-black dropdown-end mr-4">
                 <div tabIndex={0}>
                   <div className="avatar">
                     <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
@@ -126,8 +127,11 @@ const Navbar = () => {
                 </div>
                 <ul
                   tabIndex={0}
-                  className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+                  className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 space-y-2"
                 >
+                  <p  className="bg-[#3B82F6] rounded-md p-2 text-white font-bold">
+                    <p>{user?.displayName}</p>
+                  </p>
                   <li>
                     <Link className="hover:bg-[#3B82F6] hover:text-white p-2 font-bold" to={"/myprofile"}>My profile</Link>
                   </li>
@@ -143,8 +147,8 @@ const Navbar = () => {
           </div>
           <Link className="" to={"/login"}>
             {!user && (
-              <button className="btn bg-[#3B82F6] lg:px-8 text-white font-bold rounded-md text-lg">
-                Login
+              <button className="btn bg-[#3B82F6] hover:bg-[#3B82F6] border-none lg:px-8 text-white font-bold rounded-md text-lg">
+                Join With Us
               </button>
             )}
           </Link>

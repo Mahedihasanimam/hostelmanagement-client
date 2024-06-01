@@ -7,7 +7,7 @@ const MainLayout = () => {
     return (
         <div>
             {/* navbar  */}
-           <div className="mt-[70px]">
+           <div className="">
            <Navbar/>
            </div>
             {/* outlate  */}
