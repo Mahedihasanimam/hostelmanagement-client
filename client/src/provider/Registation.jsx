@@ -21,7 +21,7 @@ const Registation = () => {
   const onSubmit = (data) => {
 
     const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
-    const name = data.username;
+  
     const email = data.email;
     if (!emailRegex.test(email)) {
       return toast.error("please provide a valid email");
@@ -47,7 +47,7 @@ const Registation = () => {
 
 
   return (
-    <div className="flex  lg:flex-row md:flex-row flex-col justify-center items-center  mt-4">
+    <div className="flex  mt-28  lg:flex-row md:flex-row flex-col justify-center items-center ">
       <div className="">
         <img src={loginimage} alt="" />
       </div>

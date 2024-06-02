@@ -19,7 +19,7 @@ console.log(card);
   return (
     <div className="my-8 px-4">
       <div className="lg:w-1/2 mx-auto text-center my-6 space-y-2">
-      <h1 className="text-4xl font-bold text-center">Meal by category</h1>
+      <h1 className="text-4xl font-bold lg:text-5xl">Meal by category</h1>
       <p>Meals by Category" offers diverse options like Breakfast, Lunch, and Dinner. Each category features delicious meals with detailed descriptions!</p>
       </div>
       <Tabs >
@@ -31,7 +31,7 @@ console.log(card);
           <Tab>All Meals</Tab>
         </TabList>
         </div>
-      <div className="container mx-auto">
+      <div className="container mt-4 mx-auto">
       <TabPanel>
            <TapCard category={breakfast}/>
         </TabPanel>

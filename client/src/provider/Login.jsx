@@ -54,8 +54,8 @@ const handlegoolelogin=()=>{
 }
   // hoock form
   return (
-    <div className="flex lg:flex-row md:flex-row flex-col mx-auto justify-center items-center  mt-4 gap-8">
-      <div className="">
+    <div className="flex mt-28 lg:flex-row md:flex-row flex-col mx-auto justify-center items-center  gap-8">
+      <div className="">    
         <img src={loginimage} alt="" />
       </div>
       <div className="lg:w-1/2 md:w-2/3">
