@@ -17,7 +17,7 @@ const MemberShip = () => {
               </p>
             </div>
           </div>
-          <div className="flex  flex-wrap items-stretch justify-center ">
+          <div className="flex  flex-wrap items-stretch lg:justify-center md:justify-start justify-center ">
             <div
               className="flex max-w-md mb-8 sm:px-4 md:w-1/2 lg:w-1/3 lg:mb-0"
               data-aos="fade-up"
@@ -26,9 +26,9 @@ const MemberShip = () => {
             >
               <div className="flex flex-grow flex-col p-6 space-y-6 rounded shadow sm:p-8 ">
                 <div className="space-y-2">
-                  <h4 className="text-2xl font-bold">Team</h4>
+                  <h4 className="text-2xl font-bold">Silver</h4>
                   <span className="text-6xl font-bold">
-                    $72
+                    $5
                     <span className="text-sm tracking-wide">/month</span>
                   </span>
                 </div>
@@ -123,9 +123,9 @@ const MemberShip = () => {
             >
               <div className="flex flex-grow flex-col p-6 space-y-6 rounded shadow sm:p-8 ">
                 <div className="space-y-2">
-                  <h4 className="text-2xl font-bold">Team</h4>
+                  <h4 className="text-2xl font-bold">Gold</h4>
                   <span className="text-6xl font-bold">
-                    $72
+                    $20
                     <span className="text-sm tracking-wide">/month</span>
                   </span>
                 </div>
@@ -220,9 +220,9 @@ const MemberShip = () => {
             >
               <div className="flex flex-grow flex-col p-6 space-y-6 rounded shadow sm:p-8 ">
                 <div className="space-y-2">
-                  <h4 className="text-2xl font-bold">Team</h4>
+                  <h4 className="text-2xl font-bold">Platinum</h4>
                   <span className="text-6xl font-bold">
-                    $72
+                    $52
                     <span className="text-sm tracking-wide">/month</span>
                   </span>
                 </div>
