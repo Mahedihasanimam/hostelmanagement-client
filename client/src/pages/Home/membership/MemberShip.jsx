@@ -6,8 +6,8 @@ const MemberShip = () => {
       <section className="py-20 ">
         <div className="container px-4 mx-auto">
           <div className="max-w-2xl mx-auto mb-16 text-center">
-            <div className=" space-y-3 text-center my-6 space-y-2">
-              <h1 className="text-4xl font-bold lg:text-5xl">
+            <div className=" space-y-3 text-center my-6 ">
+              <h1 className="text-4xl font-bold lg:text-6xl">
               Premium Membership
               </h1>
               <p>

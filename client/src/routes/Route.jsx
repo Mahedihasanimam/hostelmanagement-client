@@ -11,6 +11,7 @@ import Registation from "../provider/Registation";
 import MyProfile from "../components/MyProfile";
 import MealDetails from "../pages/Home/MealsByCategory/MealDetails";
 import { axiosCommon } from "../hooks/UseAxiosCommon";
+import AllMeal from "../pages/Meals/AllMeal";
 
   const router = createBrowserRouter([
     {
@@ -20,6 +21,10 @@ import { axiosCommon } from "../hooks/UseAxiosCommon";
         {
             path:'/',
             element:<Home/>
+        },
+        {
+          path:'/meals',
+          element:<AllMeal/>
         }
         ,
         {

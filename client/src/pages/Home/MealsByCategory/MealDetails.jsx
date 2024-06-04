@@ -2,6 +2,7 @@ import { Rating } from "@smastrom/react-rating";
 import { useLoaderData } from "react-router-dom";
 import { BiLike } from "react-icons/bi";
 import MyButton from "../../../components/MyButton";
+import { useState } from "react";
 const MealDetails = () => {
   const data = useLoaderData();
   console.log(data.data);
@@ -16,7 +17,11 @@ const MealDetails = () => {
     ingredients,
     post_time,
   } = data.data;
+const [like,setlike]=useState(false)
+// const [likeCount,setLikeCount]=useState(1)
+// console.log(likeCount);
 
+console.log(like);
   return (
     <div className="mt-28 ">
       <div className="">
@@ -25,11 +30,17 @@ const MealDetails = () => {
             <img className=" rounded-lg w-full" src={image} alt="Album" />
           </figure>
           <div className="card-body lg:w-1/2 mx-auto">
-            <div className=" flex justify-between items-center justify-center">
+            <div className=" flex justify-between items-center ">
           <strong>category-{category}</strong>
 
             <div>
-                  <BiLike className="cursor-pointer lg:mr-8" size={70} />
+                  <BiLike disab onClick={()=>{
+                    setlike(!like)
+                    // if(like){
+                    //   setLikeCount(like+1)
+                    // }
+                  
+                    }} className={`cursor-pointer  lg:mr-8 ${like?"text-blue-500 disabled":""}`} size={70} />
                 </div>
             </div>
             <div className=" space-y-3">
@@ -56,11 +67,13 @@ const MealDetails = () => {
             <div>
               <div className="overflow-x-auto">
                 <p>
-                  {" "}
+                
                   <strong>details</strong> : {details}
                 </p>
               </div>
+              
               <MyButton label={'Request Meal'}/>
+              
             </div>
           
           </div>

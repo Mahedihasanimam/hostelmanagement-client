@@ -143,9 +143,9 @@ const Navbar = () => {
                   <li>
                     <Link
                       className="hover:bg-[#3B82F6] hover:text-white p-2 font-bold"
-                      to={"/myprofile"}
+                      to={"/dashboard"}
                     >
-                      My profile
+                      Dashboard
                     </Link>
                   </li>
                   <li

@@ -6,8 +6,8 @@ import MyButton from "../../../components/MyButton";
 const MealCard = ({ item }) => {
   const { title, image, category, rating, price, details,_id} = item;
   return (
-    <div className="p-4  border-2 border-blue-300 bg-white rounded-lg shadow-md dark:bg-gray-800">
-      <div className="flex items-center justify-between ">
+    <div className="p-4  border-2 border-blue-300 bg-white rounded-lg shadow-md dark:bg-gray-800"data-aos="flip-up"data-aos-duration="2000">
+      <div className="flex  items-center justify-between ">
         <div>
           <div className="px-2">
             <h3 className="font-bold text-lg">dishes item-{title}</h3>

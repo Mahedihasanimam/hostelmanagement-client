@@ -2,6 +2,7 @@
 import Carocel from "./Carocel";
 import MealByCategory from "./MealsByCategory/MealByCategory";
 import MemberShip from "./membership/MemberShip";
+import Reviews from "./reviews/Reviews";
 
 
 
@@ -11,6 +12,7 @@ const Home = () => {
             <Carocel/>
             <MealByCategory/>
             <MemberShip/>
+            <Reviews/>
         </div>
     );
 };
