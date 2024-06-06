@@ -3,10 +3,22 @@ import { useLoaderData } from "react-router-dom";
 import { BiLike } from "react-icons/bi";
 import MyButton from "../../../components/MyButton";
 import { useState } from "react";
+import UseAxiosSecure from "../../../hooks/UseAxiosSecure";
+import UseAuth from "../../../hooks/UseAuth";
+import useAxiosCommon from "../../../hooks/UseAxiosCommon";
+
+import Swal from "sweetalert2";
+import MealReview from "../../../components/mealreview/MealReview";
+import ReviewCard from "../../../components/mealreview/ReviewCard";
+
 
 const MealDetails = () => {
   const data = useLoaderData();
-  console.log(data.data);
+  const axiosCommon = useAxiosCommon();
+  const [mealreview,isLoading,refetch]=MealReview()
+  console.log(mealreview);
+  const { user } = UseAuth();
+ 
   const {
     title,
     image,
@@ -17,17 +29,44 @@ const MealDetails = () => {
     distributor,
     ingredients,
     post_time,
+    _id
   } = data.data;
   const [like, setlike] = useState(false);
   // const [likeCount,setLikeCount]=useState(1)
   // console.log(likeCount);
-const handlereview=async(e)=>{
-  e.preventDefault()
-  const review=e.target.review.value
-  e.target.review.value=''
-  console.log(review);
-}
-  console.log(like);
+  const handlereview = async (e) => {
+    e.preventDefault();
+    const review = e.target.review.value;
+    const reviewId=_id;
+    const email = user.email;
+    const name = user.displayName;
+    const photo = user.photoURL;
+    const date=new Date().toLocaleDateString()
+
+    const mealreviewData = {
+      review,
+      email,
+      name,
+      photo,
+      reviewId,
+      date
+    };
+    console.table(mealreviewData);
+    const {data}=await axiosCommon.post('/mealreview',mealreviewData)
+    if(data.acknowledged){
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "yor feedback added!!",
+        showConfirmButton: false,
+        timer: 1500
+      });
+      e.target.review.value = "";
+      refetch()
+    }
+    
+  };
+  
   return (
     <div className="mt-28 ">
       <div className="">
@@ -38,6 +77,7 @@ const handlereview=async(e)=>{
           <div className="card-body lg:w-1/2 mx-auto">
             <div className=" flex justify-between items-center ">
               <strong>category-{category}</strong>
+              <strong>review count-{mealreview.filter(i=>i.reviewId===_id).length}</strong>
 
               <div>
                 <BiLike
@@ -86,6 +126,12 @@ const handlereview=async(e)=>{
                 </p>
               </div>
               <MyButton label={"Request Meal"} />
+
+              <div className="border-2 border-slate-200 m-4 rounded-lg p-4">
+                {
+                  mealreview.filter(i=>i.reviewId===_id).map(item=><ReviewCard key={item._id} item={item}/>)
+                }
+              
               <form onSubmit={handlereview}>
                 <textarea
                   className="w-full mt-4 border-2 border-slate-300 rounded-md textarea textarea-info p-4"
@@ -98,8 +144,13 @@ const handlereview=async(e)=>{
                 {/* <input>
                 <MyButton label={'send'}/>
                 </input> */}
-                <input className="btn bg-[#5070F3] hover:bg-[#5070F3] text-white font-bold px-8 " type="submit" value="send" />
+                <input
+                  className="btn bg-[#5070F3] hover:bg-[#5070F3] text-white font-bold px-8 "
+                  type="submit"
+                  value="send"
+                />
               </form>
+              </div>
             </div>
           </div>
         </div>

@@ -1,9 +1,10 @@
-import axios from "axios"
-const AxiosSecure=axios.create({
-    baseURL:process.env.VITE_API_URL
+import axios from 'axios'
+
+export const AxiosSecure = axios.create({
+  baseURL: import.meta.env.VITE_API_URL,
 })
 const UseAxiosSecure = () => {
-    AxiosSecure
-};
+  return AxiosSecure
+}
 
-export default UseAxiosSecure;
+export default UseAxiosSecure
