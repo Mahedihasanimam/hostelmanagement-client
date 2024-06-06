@@ -21,7 +21,7 @@ const AllMeal = () => {
   }
 
   return (
-    <div className="mt-28">
+    <div className="mt-24">
       <div className="p-6 py-16 bg-blue-400 text-white">
         <div className="container mx-auto">
           <h1 className="lg:text-6xl md:text-4xl font-bold text-center">

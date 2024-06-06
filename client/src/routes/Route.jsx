@@ -12,6 +12,8 @@ import MyProfile from "../components/MyProfile";
 import MealDetails from "../pages/Home/MealsByCategory/MealDetails";
 import { axiosCommon } from "../hooks/UseAxiosCommon";
 import AllMeal from "../pages/Meals/AllMeal";
+import UpCommingMeal from "../pages/upcomming/UpCommingMeal";
+import ChackOut from "../pages/Home/membership/ChackOut";
 
   const router = createBrowserRouter([
     {
@@ -26,10 +28,16 @@ import AllMeal from "../pages/Meals/AllMeal";
           path:'/meals',
           element:<AllMeal/>
         }
-        ,
+        ,{
+          path:'/upcommingmeals',
+          element:<UpCommingMeal/>
+        },
         {
           path:'/bemembar',
           element:<Member/>
+        },{
+          path:'/chackout/:id',
+          element:<ChackOut/>
         }
         ,
         {

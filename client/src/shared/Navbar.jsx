@@ -51,7 +51,7 @@ const Navbar = () => {
           Upcoming Meals
         </NavLink>
       </li>
-      <li className="text-lg font-semibold mr-2">
+      {/* <li className="text-lg font-semibold mr-2">
         <NavLink
           className={({ isActive }) =>
             isActive ? " bg-[#3B82F6] text-white " : ""
@@ -60,7 +60,7 @@ const Navbar = () => {
         >
           Be a Member
         </NavLink>
-      </li>
+      </li> */}
 
       {/* {
         user && <li className="text-sm font-semibold">
