@@ -5,15 +5,16 @@ import UseAxiosCommon from "./UseAxiosCommon";
 
 const UseCard = () => {
     const axiosCommon=UseAxiosCommon()
-    const {data:card=[],isLoading}=useQuery({
+    const {data:card=[],isLoading,fetchNextPage }=useQuery({
         queryKey:['card'],
         queryFn:async()=>{
             const res=await axiosCommon.get('/meals')
             return res.data
         }
     })
+   
 
-    return [card]
+    return [card,isLoading,fetchNextPage]
 };
 
 export default UseCard;

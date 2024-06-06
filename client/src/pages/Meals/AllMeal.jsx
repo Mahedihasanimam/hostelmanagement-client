@@ -1,18 +1,25 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import UseCard from "../../hooks/UseCard";
 import MealCard from "../Home/MealsByCategory/MealCard";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const AllMeal = () => {
-  const [card] = UseCard();
-  const [rangeval, setrangeVal] = useState(0);
+  const [card, isLoading, fetchNextPage, hasNextPage] = UseCard();
+  const [rangeVal, setRangeVal] = useState(0);
 
-  const handlesort = async (e) => {
-    e.preventDefault()
-    const category=e.target.category.value
-    const price=e.target.range.value
-    
-    console.log(category,price);
+  const handleSort = async (e) => {
+    e.preventDefault();
+    const category = e.target.category.checked;
+    const price = rangeVal;
+
+    console.log("Category:", category, "Price:", price);
+    // Add logic to filter the meals based on category and price range
   };
+
+  if (isLoading && !card.length) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="mt-28">
       <div className="p-6 py-16 bg-blue-400 text-white">
@@ -38,39 +45,53 @@ const AllMeal = () => {
         </div>
       </div>
 
-      <div className="lg:flex ">
-        <div className="min-w-60   m-4 ">
-          <form onSubmit={handlesort}>
-            <div className="shadow-lg  p-6 mt-12">
+      <div className="lg:flex">
+        <div className="min-w-60 m-4">
+          <form onSubmit={handleSort}>
+            <div className="shadow-lg p-6 mt-12">
               <h3 className="font-bold mb-2">Filter category meals</h3>
-              <div className="flex items-center ">
-              <input
-                className="mr-2 h-6 w-6 cursor-pointer"
-                type="checkbox"
-                name="category"
-                id="category"
-              />
-              <label htmlFor="category" className="text-xl">Category</label> <br />
+              <div className="flex items-center">
+                <input
+                  className="mr-2 h-6 w-6 cursor-pointer"
+                  type="checkbox"
+                  name="category"
+                  id="category"
+                />
+                <label htmlFor="category" className="text-xl">
+                  Category
+                </label>
               </div>
-              <h3 className="font-bold mt-6 mb-2">filter-by-price-range</h3>
+              <h3 className="font-bold mt-6 mb-2">Filter by price range</h3>
               <input
                 type="range"
                 min={0}
-                max="1000"
+                max="50"
                 name="range"
-                //  value={0}
+                value={rangeVal}
+                onChange={(e) => setRangeVal(e.target.value)}
                 className="range range-info"
               />
+              <div className="text-right">${rangeVal}</div>
 
-              <button className="w-full bg-[#3B82F6] font-bold text-white p-1 rounded-lg mt-6">get meal</button>
+              <button className="w-full bg-[#3B82F6] font-bold text-white p-1 rounded-lg mt-6">
+                Get meal
+              </button>
             </div>
           </form>
         </div>
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 px-4 gap-4 my-12">
-          {card.map((item) => (
-            <MealCard key={item._id} item={item} />
-          ))}
-        </div>
+        <InfiniteScroll
+          dataLength={card.length}
+          next={fetchNextPage}
+          hasMore={hasNextPage}
+          loader={<h4>Loading...</h4>}
+          endMessage={<p>No more data to load</p>}
+        >
+          <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 px-4 gap-4 my-12">
+            {card.map((item) => (
+              <MealCard key={item._id} item={item} />
+            ))}
+          </div>
+        </InfiniteScroll>
       </div>
     </div>
   );

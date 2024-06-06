@@ -3,6 +3,7 @@ import { useLoaderData } from "react-router-dom";
 import { BiLike } from "react-icons/bi";
 import MyButton from "../../../components/MyButton";
 import { useState } from "react";
+
 const MealDetails = () => {
   const data = useLoaderData();
   console.log(data.data);
@@ -17,11 +18,16 @@ const MealDetails = () => {
     ingredients,
     post_time,
   } = data.data;
-const [like,setlike]=useState(false)
-// const [likeCount,setLikeCount]=useState(1)
-// console.log(likeCount);
-
-console.log(like);
+  const [like, setlike] = useState(false);
+  // const [likeCount,setLikeCount]=useState(1)
+  // console.log(likeCount);
+const handlereview=async(e)=>{
+  e.preventDefault()
+  const review=e.target.review.value
+  e.target.review.value=''
+  console.log(review);
+}
+  console.log(like);
   return (
     <div className="mt-28 ">
       <div className="">
@@ -31,17 +37,23 @@ console.log(like);
           </figure>
           <div className="card-body lg:w-1/2 mx-auto">
             <div className=" flex justify-between items-center ">
-          <strong>category-{category}</strong>
+              <strong>category-{category}</strong>
 
-            <div>
-                  <BiLike disab onClick={()=>{
-                    setlike(!like)
+              <div>
+                <BiLike
+                  disab
+                  onClick={() => {
+                    setlike(!like);
                     // if(like){
                     //   setLikeCount(like+1)
                     // }
-                  
-                    }} className={`cursor-pointer  lg:mr-8 ${like?"text-blue-500 disabled":""}`} size={70} />
-                </div>
+                  }}
+                  className={`cursor-pointer  lg:mr-8 ${
+                    like ? "text-blue-500 disabled" : ""
+                  }`}
+                  size={70}
+                />
+              </div>
             </div>
             <div className=" space-y-3">
               <h3 className="font-bold lg:text-4xl md:text-2xl text-xl">
@@ -56,29 +68,41 @@ console.log(like);
                   <div className="flex flex-wrap gap-2">
                     <strong>ingredients</strong>
                     {ingredients.map((i) => (
-                      <p key={i._id}><button className="btn btn-xs bg-blue-200 hover:bg-blue-200">{i}</button></p>
+                      <p key={i._id}>
+                        <button className="btn btn-xs bg-blue-200 hover:bg-blue-200">
+                          {i}
+                        </button>
+                      </p>
                     ))}
                   </div>
                 </div>
-                
               </div>
             </div>
             <hr />
             <div>
               <div className="overflow-x-auto">
                 <p>
-                
                   <strong>details</strong> : {details}
                 </p>
               </div>
-              
-              <MyButton label={'Request Meal'}/>
-              
+              <MyButton label={"Request Meal"} />
+              <form onSubmit={handlereview}>
+                <textarea
+                  className="w-full mt-4 border-2 border-slate-300 rounded-md textarea textarea-info p-4"
+                  name="review"
+                  id=""
+                  cols="10"
+                  rows="5"
+                  placeholder="write your feedback"
+                ></textarea>
+                {/* <input>
+                <MyButton label={'send'}/>
+                </input> */}
+                <input className="btn bg-[#5070F3] hover:bg-[#5070F3] text-white font-bold px-8 " type="submit" value="send" />
+              </form>
             </div>
-          
           </div>
         </div>
-
       </div>
     </div>
   );
