@@ -37,7 +37,8 @@ import ChackOut from "../pages/Home/membership/ChackOut";
           element:<Member/>
         },{
           path:'/chackout/:id',
-          element:<ChackOut/>
+          element:<ChackOut/>,
+          loader:({params})=>axiosCommon(`/membership/${params.id}`)
         }
         ,
         {
