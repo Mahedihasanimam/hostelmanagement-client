@@ -2,9 +2,17 @@ import React, { useState } from "react";
 import UseCard from "../../hooks/UseCard";
 import MealCard from "../Home/MealsByCategory/MealCard";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { ImSpinner9 } from "react-icons/im";
+import TapCard from "../Home/MealsByCategory/TapCard";
 
 const AllMeal = () => {
   const [card, isLoading, fetchNextPage, hasNextPage] = UseCard();
+  const [mealcategory,setmealcategory]=useState('allCategory')
+  const breakfast=card.filter(item=>item.category==='breakfast')
+const lunch=card.filter(item=>item.category==='lunch')
+const dinner=card.filter(item=>item.category==='dinner')
+const allMeals=card.filter(item=>item.category==='allMeals')
+const allCategory=card
   const [rangeVal, setRangeVal] = useState(0);
 
   const handleSort = async (e) => {
@@ -17,9 +25,18 @@ const AllMeal = () => {
   };
 
   if (isLoading && !card.length) {
-    return <div>Loading...</div>;
+    return (
+      <ImSpinner9
+        size={40}
+        className=" animate-spin absolute top-1/2 left-1/2 text-[#60A5FA]  "
+      />
+    );
   }
 
+  const handlecategory=async(e)=>{
+    e.preventDefault()
+    setmealcategory(e.target.value);
+  }
   return (
     <div className="mt-24">
       <div className="p-6 py-16 bg-blue-400 text-white">
@@ -51,15 +68,17 @@ const AllMeal = () => {
             <div className="shadow-lg p-6 mt-12">
               <h3 className="font-bold mb-2">Filter category meals</h3>
               <div className="flex items-center">
-                <input
-                  className="mr-2 h-6 w-6 cursor-pointer"
-                  type="checkbox"
-                  name="category"
-                  id="category"
-                />
-                <label htmlFor="category" className="text-xl">
-                  Category
-                </label>
+                <form onChange={handlecategory}>
+                <select  className="select select-bordered w-full max-w-xs font-bold">
+                  <option value="allCategory">allCategory</option>
+                  <option value={'allMeals'}>
+                    All Meals
+                  </option>
+                  <option value={'breakfast'}>Breakfast</option>
+                  <option value={'lunch'}>Lunch</option>
+                  <option value={'dinner'}>Dinner</option>
+                </select>
+                </form>
               </div>
               <h3 className="font-bold mt-6 mb-2">Filter by price range</h3>
               <input
@@ -86,10 +105,22 @@ const AllMeal = () => {
           loader={<h4>Loading...</h4>}
           endMessage={<p>No more data to load</p>}
         >
-          <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 px-4 gap-4 my-12">
-            {card.map((item) => (
-              <MealCard key={item._id} item={item} />
-            ))}
+          <div className=" px-4 gap-4 my-12">
+            {
+              mealcategory==='breakfast' && <TapCard category={breakfast}/>
+            }
+            {
+              mealcategory==='lunch' && <TapCard category={lunch}/>
+            }
+            {
+              mealcategory==='dinner' && <TapCard category={dinner}/>
+            }
+            {
+              mealcategory==='allMeals' && <TapCard category={allMeals}/>
+            }
+            {
+              mealcategory==='allCategory' && <TapCard category={allCategory}/>
+            }
           </div>
         </InfiniteScroll>
       </div>
