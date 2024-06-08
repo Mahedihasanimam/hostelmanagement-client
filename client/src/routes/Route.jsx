@@ -14,6 +14,7 @@ import { axiosCommon } from "../hooks/UseAxiosCommon";
 import AllMeal from "../pages/Meals/AllMeal";
 import UpCommingMeal from "../pages/upcomming/UpCommingMeal";
 import ChackOut from "../pages/Home/membership/ChackOut";
+import Dashboard from "../pages/dashboard/Dashboard";
 
   const router = createBrowserRouter([
     {
@@ -59,6 +60,10 @@ import ChackOut from "../pages/Home/membership/ChackOut";
         }
       ]
     },
+    {
+      path:'/dashboard',
+      element:<Dashboard/>
+    }
   ]);
 
   export default router

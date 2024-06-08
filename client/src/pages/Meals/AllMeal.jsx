@@ -70,7 +70,7 @@ const allCategory=card
               <div className="flex items-center">
                 <form onChange={handlecategory}>
                 <select  className="select select-bordered w-full max-w-xs font-bold">
-                  <option value="allCategory">allCategory</option>
+                  <option value="allCategory">AllCategory</option>
                   <option value={'allMeals'}>
                     All Meals
                   </option>
@@ -102,7 +102,7 @@ const allCategory=card
           dataLength={card.length}
           next={fetchNextPage}
           hasMore={hasNextPage}
-          loader={<h4>Loading...</h4>}
+          loader={<ImSpinner9 className="animate-spin"/>}
           endMessage={<p>No more data to load</p>}
         >
           <div className=" px-4 gap-4 my-12">
