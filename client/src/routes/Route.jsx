@@ -8,13 +8,14 @@ import Member from "../pages/Member/Member";
 
 import Login from "../provider/Login";
 import Registation from "../provider/Registation";
-import MyProfile from "../components/MyProfile";
+import MyProfile from "../pages/dashboard/userMenu/userprofile/MyProfile";
 import MealDetails from "../pages/Home/MealsByCategory/MealDetails";
 import { axiosCommon } from "../hooks/UseAxiosCommon";
 import AllMeal from "../pages/Meals/AllMeal";
 import UpCommingMeal from "../pages/upcomming/UpCommingMeal";
 import ChackOut from "../pages/Home/membership/ChackOut";
 import Dashboard from "../pages/dashboard/Dashboard";
+import MyReviews from "../pages/dashboard/userMenu/myreview/MyReviews";
 
   const router = createBrowserRouter([
     {
@@ -62,7 +63,16 @@ import Dashboard from "../pages/dashboard/Dashboard";
     },
     {
       path:'/dashboard',
-      element:<Dashboard/>
+      element:<Dashboard/>,
+      children:[
+        {
+          path:'',
+          element:<MyProfile/>
+      },{
+        path:'myreview',
+        element:<MyReviews/>
+      }
+      ]
     }
   ]);
 
