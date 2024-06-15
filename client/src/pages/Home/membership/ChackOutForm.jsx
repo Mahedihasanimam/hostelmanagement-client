@@ -95,7 +95,8 @@ const ChackOutForm = ({price}) => {
                 transectionId:transectionId,
                 date:new Date().toLocaleDateString()
               }
-              console.table(paymentData);
+              const {data}=await AxiosSecure.post(`/payment`,paymentData)
+              console.log(data);
           }
 
           console.log('confirm payment',paymentIntent);
