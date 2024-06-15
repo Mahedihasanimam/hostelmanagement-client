@@ -17,6 +17,7 @@ import ChackOut from "../pages/Home/membership/ChackOut";
 import Dashboard from "../pages/dashboard/Dashboard";
 import MyReviews from "../pages/dashboard/userMenu/myreview/MyReviews";
 import EditReview from "../pages/dashboard/userMenu/myreview/EditReview";
+import PaymentHistory from "../pages/dashboard/userMenu/payment/PaymentHistory";
 
   const router = createBrowserRouter([
     {
@@ -77,6 +78,11 @@ import EditReview from "../pages/dashboard/userMenu/myreview/EditReview";
         path:'editreview/:id',
         element:<EditReview/>,
         loader:({params})=>axiosCommon(`/myreview/${params.id}`)
+      }
+      ,{
+        path:'paymenthistory',
+        element:<PaymentHistory/>,
+
       }
       ]
     }
