@@ -1,7 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { AxiosSecure } from "../../../../hooks/UseAxiosSecure";
+import UseAuth from "../../../../hooks/UseAuth";
 
 const PaymentHistory = () => {
+    const {user}=UseAuth()
 
     const {data:pay=[],refetch}=useQuery({
         queryKey:['pay'],
@@ -11,7 +13,7 @@ const PaymentHistory = () => {
             return data
         }
     })
-
+const mypay=pay.filter(i=>i.email===user?.email)
  console.log(pay);
     return (
         <div className="overflow-x-auto min-h-screen my-8 px-4">
@@ -28,7 +30,7 @@ const PaymentHistory = () => {
           </thead>
           <tbody>
             {
-                pay.map(p=><tr className="even:text-black" key={p._id}>
+                mypay.map(p=><tr className="even:text-black" key={p._id}>
                     {/* row 1 */}
                     
                       <td>
@@ -52,7 +54,7 @@ const PaymentHistory = () => {
           </tbody>
         </table>
         {
-          pay.length<1 && <div className="flex my-8 mx-auto  flex-row px-4 lg:w-[1000PX]  pl-4 py-2 gap-2 items-center border rounded-lg shadow overflow-hidden bg-gray-900 dark:bg-gray-50 border-violet-400 dark:border-violet-600">
+          mypay.length<1 && <div className="flex my-8 mx-auto  flex-row px-4 lg:w-[1000PX]  pl-4 py-2 gap-2 items-center border rounded-lg shadow overflow-hidden bg-gray-900 dark:bg-gray-50 border-violet-400 dark:border-violet-600">
           <span className="flex-shrink-0 inline-flex mx-3 item-center justify-center leading-none rounded-full bg-violet-400 dark:bg-violet-600 text-gray-900 dark:text-gray-50">
             <svg
               xmlns="http://www.w3.org/2000/svg"

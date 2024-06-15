@@ -1,7 +1,4 @@
-import {
-    createBrowserRouter,
-  
-  } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/Home/Home";
 import MainLayout from "../mainLayout/MainLayout";
 import Member from "../pages/Member/Member";
@@ -19,75 +16,86 @@ import MyReviews from "../pages/dashboard/userMenu/myreview/MyReviews";
 import EditReview from "../pages/dashboard/userMenu/myreview/EditReview";
 import PaymentHistory from "../pages/dashboard/userMenu/payment/PaymentHistory";
 import ErrorPage from "../pages/error page/ErrorPage";
+import RequestedMeal from "../pages/dashboard/userMenu/requestedmeals/RequestedMeal";
 
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <MainLayout/>,
-      errorElement:<ErrorPage/>,
-      children:[
-        {
-            path:'/',
-            element:<Home/>
-        },
-        {
-          path:'/meals',
-          element:<AllMeal/>
-        }
-        ,{
-          path:'/upcommingmeals',
-          element:<UpCommingMeal/>
-        },
-        {
-          path:'/bemembar',
-          element:<Member/>
-        },{
-          path:'/chackout/:id',
-          element:<ChackOut/>,
-          loader:({params})=>axiosCommon(`/membership/${params.id}`)
-        }
-        ,
-        {
-          path:'/details/:id',
-          element:<MealDetails/>,
-          loader:({params})=>axiosCommon(`/details/${params.id}`)
-        }
-    
-        ,
-        {
-          path:'/login',
-          element:<Login/>
-        }
-        ,
-        {
-          path:'/registation',
-          element:<Registation/>
-        }
-      ]
-    },
-    {
-      path:'/dashboard',
-      element:<Dashboard/>,
-      children:[
-        {
-          path:'',
-          element:<MyProfile/>
-      },{
-        path:'myreview',
-        element:<MyReviews/>
-      }
-      ,{
-        path:'editreview/:id',
-        element:<EditReview/>,
-        loader:({params})=>axiosCommon(`/myreview/${params.id}`)
-      }
-      ,{
-        path:'paymenthistory',
-        element:<PaymentHistory/>,
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <MainLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/meals",
+        element: <AllMeal />,
+      },
+      {
+        path: "/upcommingmeals",
+        element: <UpCommingMeal />,
+      },
+      {
+        path: "/bemembar",
+        element: <Member />,
+      },
+      {
+        path: "/chackout/:id",
+        element: <ChackOut />,
+        loader: ({ params }) => axiosCommon(`/membership/${params.id}`),
+      },
+      {
+        path: "/details/:id",
+        element: <MealDetails />,
+        loader: ({ params }) => axiosCommon(`/details/${params.id}`),
+      },
 
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/registation",
+        element: <Registation />,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
+    children: [
+      //user dashboard
+      {
+        path: "",
+        element: <MyProfile />,
+      },
+      {
+        path: "myreview",
+        element: <MyReviews />,
+      },
+      {
+        path: "editreview/:id",
+        element: <EditReview />,
+        loader: ({ params }) => axiosCommon(`/myreview/${params.id}`),
       }
-      ]
-    }
-  ]);
+      ,
+      {
+        path: "paymenthistory",
+        element: <PaymentHistory />,
+      }
+      ,
+      {
+        path: "requestedmeals",
+        element: <RequestedMeal />,
+      }
+      ,
+      // admin dashboard 
+      // {
+      //   path:''
+      // }
+    ],
+  },
+]);
 
-  export default router
+export default router;

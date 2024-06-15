@@ -70,12 +70,37 @@ const MealDetails = () => {
     }
     
   };
-  const handleLikeCount=async(id)=>{
+  const handleLikeCount=async()=>{
     setLikeCount(likeCount+1);
 
     const {data}=await axiosCommon.put(`/meals`,likeCount)
     console.log(data);
   }
+
+  const handlemealreauest=async(e)=>{
+    
+// console.log('hidded',e);
+// Swal.fire({
+//   title: "Are you sure?",
+//   text: "the mill will be added to request meal!",
+//   icon: "warning",
+//   showCancelButton: true,
+//   confirmButtonColor: "#3085d6",
+//   cancelButtonColor: "#d33",
+//   confirmButtonText: "Yes, Add it!"
+// }).then(async(result) => {
+
+//   if (result.isConfirmed) {
+//     Swal.fire({
+//       title: "Added!",
+//       text: "Your meal has been Added.",
+//       icon: "success"
+//     });
+//   }
+// });
+const {data}=await axiosCommon.post('/requestmeal',e)
+console.log(data);
+}
   return (
     <div className="mt-28 ">
       <div className="">
@@ -137,7 +162,9 @@ const MealDetails = () => {
                   <strong>details</strong> : {details}
                 </p>
               </div>
-              <MyButton label={"Request Meal"} />
+              <button onClick={()=>handlemealreauest(data.data)} disabled={!user} className="btn bg-blue-500 text-white font-bold mt-4 hover:bg-blue-500">
+             Request Meal
+              </button>
 
               <div className="border-2 border-slate-200 m-4 rounded-lg p-4">
                 {
