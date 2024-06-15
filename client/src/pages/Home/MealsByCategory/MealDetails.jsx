@@ -88,7 +88,7 @@ const MealDetails = () => {
               <strong>category-{category}</strong>
               <strong>review count-{mealreview.filter(i=>i.reviewId===_id).length}</strong>
 
-              <button>
+              <button  disabled={!user}>
                 <BiLike
                   
                   onClick={() => {
@@ -97,10 +97,13 @@ const MealDetails = () => {
                   }}
                   className={`cursor-pointer  lg:mr-8 ${
                     likeCount ? "text-blue-500 disabled" : ""
-                  }`}
+                  } ${!user&&"cursor-not-allowed"}`}
                   size={70}
                 />
                  <p>Like {likeCount}</p>
+                 {
+                  !user&& <p>login first to like this</p>
+                 }
               </button>
              
             </div>

@@ -18,11 +18,13 @@ import Dashboard from "../pages/dashboard/Dashboard";
 import MyReviews from "../pages/dashboard/userMenu/myreview/MyReviews";
 import EditReview from "../pages/dashboard/userMenu/myreview/EditReview";
 import PaymentHistory from "../pages/dashboard/userMenu/payment/PaymentHistory";
+import ErrorPage from "../pages/error page/ErrorPage";
 
   const router = createBrowserRouter([
     {
       path: "/",
       element: <MainLayout/>,
+      errorElement:<ErrorPage/>,
       children:[
         {
             path:'/',
