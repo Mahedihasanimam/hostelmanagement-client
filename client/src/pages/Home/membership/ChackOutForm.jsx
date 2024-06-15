@@ -88,8 +88,16 @@ const ChackOutForm = ({price}) => {
                 showConfirmButton: false,
                 timer: 2000
               });
+
+              const paymentData={
+                email:user?.email,
+                price,
+                transectionId:transectionId,
+                date:new Date().toLocaleDateString()
+              }
+              console.table(paymentData);
           }
-         
+
           console.log('confirm payment',paymentIntent);
         }
     }

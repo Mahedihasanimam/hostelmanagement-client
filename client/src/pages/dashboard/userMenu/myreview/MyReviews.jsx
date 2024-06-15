@@ -1,14 +1,48 @@
 import PropTypes from 'prop-types'
 import UseAuth from '../../../../hooks/UseAuth'
 import MealReview from '../../../../components/mealreview/MealReview'
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { CiEdit } from "react-icons/ci";
+import MyButton from '../../../../components/MyButton';
+
+import Swal from 'sweetalert2';
+import { axiosCommon } from '../../../../hooks/UseAxiosCommon';
+import { Link } from 'react-router-dom';
 const MyReviews = () => {
   const {user}=UseAuth()
+
   const [mealreview,isLoading,refetch]=MealReview()
   const mymealreview=mealreview.filter(i=>i.email===user?.email)
-  console.log(mymealreview);
+  
 
-  const handleMyRecoDelete=(e)=>{
-    e.preventDefault()
+  const handleMyReviewDelete=async(id)=>{
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to recover this query!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    })
+    
+    .then(async(result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your query has been deleted.",
+          icon: "success"
+        });
+        
+        try{
+          const {data}= await axiosCommon.delete(`${import.meta.env.VITE_API_URL}/myreview/${id}`,)
+          refetch()
+        }
+         catch(err){
+          console.log(err)
+         }
+      }
+    });
   }
   return (
     <div>
@@ -18,10 +52,10 @@ const MyReviews = () => {
         <thead className="bg-blue-100 text-black" >
           <tr>
       
-            <th>Reviewer Name</th>
-            <th>Reviewer Email</th>
-            
+            <th>meal title</th>
+            <th>Liks</th>
             <th>Review Details</th>
+            <th>View Meals</th>
           <th>Action</th>
           </tr>
         </thead>
@@ -31,22 +65,29 @@ const MyReviews = () => {
                   {/* row 1 */}
                   
                     <td>
-                       {reco.name}
+                       {reco.title}
                    
                     </td>
                     <td>
-                        {reco.email}
+                        {reco.likeCount}
                     </td>
              
                     <td>
                        {reco.review.slice(0,100)}
                     </td>
+                    <th>
+                    <MyButton toLink={`/details/${reco._id}`} label={'view meal'}/>
+                    </th>
                   
                     <th>
-                      <button onClick={()=>handleMyRecoDelete(reco._id)} className="btn btn-ghost ">
-                          {/* <RiDeleteBinLine size={25}/> */}
-                          <button>Delete</button>
+                      <button onClick={()=>handleMyReviewDelete(reco._id)} className="btn btn-ghost ">
+                          <RiDeleteBin6Line size={25}/>
+                         
                       </button>
+                      <Link to={`/dashboard/editreview/${reco._id}`} className="btn btn-ghost ">
+                          <CiEdit size={25}/>
+                         
+                      </Link>
                     </th>
                   </tr>)
           }

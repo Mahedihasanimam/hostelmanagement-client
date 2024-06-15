@@ -13,11 +13,14 @@ import ReviewCard from "../../../components/mealreview/ReviewCard";
 
 
 const MealDetails = () => {
+  const { user } = UseAuth();
   const data = useLoaderData();
   const axiosCommon = useAxiosCommon();
   const [mealreview,isLoading,refetch]=MealReview()
-  console.log(mealreview);
-  const { user } = UseAuth();
+
+
+  const [likeCount,setLikeCount]=useState(0)
+  console.log(likeCount);
  
   const {
     title,
@@ -31,11 +34,10 @@ const MealDetails = () => {
     post_time,
     _id
   } = data.data;
-  const [like, setlike] = useState(false);
-  // const [likeCount,setLikeCount]=useState(1)
-  // console.log(likeCount);
+
   const handlereview = async (e) => {
     e.preventDefault();
+    
     const review = e.target.review.value;
     const reviewId=_id;
     const email = user.email;
@@ -44,6 +46,8 @@ const MealDetails = () => {
     const date=new Date().toLocaleDateString()
 
     const mealreviewData = {
+      likeCount,
+      title,
       review,
       email,
       name,
@@ -66,7 +70,12 @@ const MealDetails = () => {
     }
     
   };
-  
+  const handleLikeCount=async(id)=>{
+    setLikeCount(likeCount+1);
+
+    const {data}=await axiosCommon.put(`/meals`,likeCount)
+    console.log(data);
+  }
   return (
     <div className="mt-28 ">
       <div className="">
@@ -79,21 +88,21 @@ const MealDetails = () => {
               <strong>category-{category}</strong>
               <strong>review count-{mealreview.filter(i=>i.reviewId===_id).length}</strong>
 
-              <div>
+              <button>
                 <BiLike
-                  disab
+                  
                   onClick={() => {
-                    setlike(!like);
-                    // if(like){
-                    //   setLikeCount(like+1)
-                    // }
+                 handleLikeCount()
+                    
                   }}
                   className={`cursor-pointer  lg:mr-8 ${
-                    like ? "text-blue-500 disabled" : ""
+                    likeCount ? "text-blue-500 disabled" : ""
                   }`}
                   size={70}
                 />
-              </div>
+                 <p>Like {likeCount}</p>
+              </button>
+             
             </div>
             <div className=" space-y-3">
               <h3 className="font-bold lg:text-4xl md:text-2xl text-xl">

@@ -16,6 +16,7 @@ import UpCommingMeal from "../pages/upcomming/UpCommingMeal";
 import ChackOut from "../pages/Home/membership/ChackOut";
 import Dashboard from "../pages/dashboard/Dashboard";
 import MyReviews from "../pages/dashboard/userMenu/myreview/MyReviews";
+import EditReview from "../pages/dashboard/userMenu/myreview/EditReview";
 
   const router = createBrowserRouter([
     {
@@ -71,6 +72,11 @@ import MyReviews from "../pages/dashboard/userMenu/myreview/MyReviews";
       },{
         path:'myreview',
         element:<MyReviews/>
+      }
+      ,{
+        path:'editreview/:id',
+        element:<EditReview/>,
+        loader:({params})=>axiosCommon(`/myreview/${params.id}`)
       }
       ]
     }
