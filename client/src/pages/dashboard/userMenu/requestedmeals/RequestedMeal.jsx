@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { axiosCommon } from "../../../../hooks/UseAxiosCommon";
-
-import { FaSkullCrossbones } from "react-icons/fa6";
+import { IoCloseSharp } from "react-icons/io5";
 import Swal from "sweetalert2";
 import UseAuth from "../../../../hooks/UseAuth";
 const RequestedMeal = () => {
@@ -57,7 +56,7 @@ const myReqMeal=reqMeal.filter(i=>i.email===user?.email)
               <th>Liks</th>
               <th>Review Details</th>
               <th>Status</th>
-              <th>email</th>
+              {/* <th>email</th> */}
               <th>Action</th>
             </tr>
           </thead>
@@ -70,14 +69,14 @@ const myReqMeal=reqMeal.filter(i=>i.email===user?.email)
                 <td>{reco.e?.title}</td>
                 <td>{reco.like}</td>
                 <td>{reco.e?.details?.slice(0, 50)}</td>
-                <td>pending</td>
-                <td>{reco.email}</td>
+                <td><button className="btn btn-sm bg-blue-500 text-white rounded-full">pending</button></td>
+                {/* <td>{reco.email}</td> */}
                 <th>
                   <button
                     onClick={() => handleRequestMealDelete(reco._id)}
                     className="btn btn-ghost"
                   >
-                    <FaSkullCrossbones size={25} />
+                    <IoCloseSharp  size={25} />
                   </button>
                  
                 </th>

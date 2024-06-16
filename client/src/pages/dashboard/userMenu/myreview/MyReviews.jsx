@@ -76,7 +76,9 @@ const MyReviews = () => {
                        {reco.review.slice(0,100)}
                     </td>
                     <th>
-                    <MyButton toLink={`/details/${reco._id}`} label={'view meal'}/>
+                   <Link to={`/details/${reco._id}`}>
+                   <button className='btn btn-sm rounded-full bg-blue-500 text-white'>View Meal</button>
+                   </Link>
                     </th>
                   
                     <th>

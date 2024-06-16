@@ -2,6 +2,7 @@ import MyButton from "../../../components/MyButton";
 import useAxiosCommon from "../../../hooks/UseAxiosCommon";
 import { useQuery } from "@tanstack/react-query";
 import MemberCard from "./MemberCard";
+import { ImSpinner9 } from "react-icons/im";
 
 const MemberShip = () => {
 
@@ -13,7 +14,14 @@ const MemberShip = () => {
       return data
     }
   })
-
+  if (isLoading && !member.length) {
+    return (
+      <ImSpinner9
+        size={40}
+        className=" animate-spin absolute top-1/2 left-1/2 text-[#60A5FA]  "
+      />
+    );
+  }
   return (
     <div>
       <section className="py-20 ">

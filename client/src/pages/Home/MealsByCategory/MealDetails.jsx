@@ -179,6 +179,7 @@ const MealDetails = () => {
 
                 <form onSubmit={handlereview}>
                   <textarea
+                  required
                     className="w-full mt-4 border-2 border-slate-300 rounded-md textarea textarea-info p-4"
                     name="review"
                     id=""

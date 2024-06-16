@@ -16,7 +16,7 @@ const Sidebar = () => {
   const handleToggle = () => {
     setActive(!isActive)
   }
-  const isAdmin=false
+  const isAdmin=true
   return (
     <div className="flex gap-6">
       {/* Small Screen Navbar */}

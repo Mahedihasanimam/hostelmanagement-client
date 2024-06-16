@@ -5,6 +5,7 @@ import "react-tabs/style/react-tabs.css";
 import UseCard from "../../../hooks/UseCard";
 
 import TapCard from "./TapCard";
+import { ImSpinner9 } from "react-icons/im";
 
 const MealByCategory = () => {
  
@@ -14,7 +15,14 @@ const lunch=card.filter(item=>item.category==='lunch')
 const dinner=card.filter(item=>item.category==='dinner')
 const allMeals=card.filter(item=>item.category==='allMeals')
 
-console.log(card);
+if (isLoading && !card.length) {
+  return (
+    <ImSpinner9
+      size={40}
+      className=" animate-spin absolute top-1/2 left-1/2 text-[#60A5FA]  "
+    />
+  );
+}
 
   return (
     <div className="my-8 px-4">
