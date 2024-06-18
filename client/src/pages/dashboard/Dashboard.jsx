@@ -12,7 +12,7 @@ const Dashboard = () => {
           </div>
         </div>
         {/* outlate */}
-        <div className="flex-1  md:ml-64  bg-slate-100">
+        <div className="flex-1 mt-0  md:ml-64 ">
           <Outlet />
         </div>
       </div>

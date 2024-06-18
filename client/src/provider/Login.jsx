@@ -8,9 +8,12 @@ import axios from "axios";
 import { AuthContext } from "./AuthProvider";
 import loginimage from "../assets/login_side_imag.svg";
 import loginlogo from "../assets/logo.png"
+import UseAuth from "../hooks/UseAuth";
+import { axiosCommon } from "../hooks/UseAxiosCommon";
 
 
 const Login = () => {
+  const {user}=UseAuth()
   const location=useLocation()
   console.log(location.state)
     const navigate=useNavigate()
@@ -30,21 +33,26 @@ const Login = () => {
     console.log(email,password)
     login(email,password)
     .then(result=>{
-
         navigate(location.state || "/")
-        console.log(result)
+        
     })
     .catch(err=>{
       toast.error('something wrong')
-        console.log(err)
+        
     })
   };
 const handlegoolelogin=()=>{
     googleLogin()
-    .then(result=>{
+    .then(async result=>{
+      const userData={
+        name:result?.user?.displayName,
+        email:result?.user?.email
+      }
+     const {data}=await axiosCommon.post('/users',userData)
+     console.log(data);
       navigate(location.state || "/")
       toast.success('Login successfully')
-        console.log(result)
+        
     })
     .catch(err=>{
         toast.error('something went wrong')

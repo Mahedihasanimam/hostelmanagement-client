@@ -1,29 +1,32 @@
 import { useState } from "react"
 import UseAuth from "../../hooks/UseAuth"
 import { Link } from "react-router-dom"
-
+import { LuMenu } from "react-icons/lu";
 import logo from "../../assets/logo.png"
 
 import { IoMdMenu, IoMdSettings } from "react-icons/io";
 
 import UserMenu from "./userMenu/UserMenu"
 import AdminMenu from "./AdminMenu/AdminMenu"
+import { RxCross2 } from "react-icons/rx";
+import { GiHamburgerMenu } from "react-icons/gi";
 const Sidebar = () => {
   const { logout } = UseAuth()
-  const [isActive, setActive] = useState(false)
-
+ 
+  // const [toggle, setToggle] = useState(false)
+  const [isActive, setActive] = useState( true)
   // Sidebar Responsive Handler
   const handleToggle = () => {
     setActive(!isActive)
   }
   const isAdmin=true
   return (
-    <div className="flex gap-6">
+    <div className="flex gap-6 ">
       {/* Small Screen Navbar */}
-      <div className='  flex justify-between md:hidden'>
+      <div className=' flex  w-full mx-auto justify-between md:hidden  z-50 '>
         <div>
           <div className='block cursor-pointer p-4 font-bold'>
-            <Link to='/'>
+            <Link to='/dashboard'>
               <img
                 // className='hidden md:block'
                 src={logo}
@@ -39,13 +42,13 @@ const Sidebar = () => {
           onClick={handleToggle}
           className='mobile-menu-button p-4 focus:outline-none focus:bg-gray-200'
         >
-          <IoMdMenu  className='h-5 w-5' />
+          {isActive ? <GiHamburgerMenu size={25}/> :<RxCross2 size={25} />  }
         </button>
       </div>
-
+     
       {/* Sidebar */}
       <div
-        className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-blue-100 w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
+        className={`z-50   h-screen flex flex-col justify-between overflow-x-hidden bg-gray-100 w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
           isActive && '-translate-x-full'
         }  md:translate-x-0  transition duration-200 ease-in-out`}
       >

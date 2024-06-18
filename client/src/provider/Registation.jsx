@@ -8,6 +8,7 @@ import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import loginimage from "../assets/login_side_imag.svg";
 import reglogo from "../assets/logo.png"
+import { axiosCommon } from "../hooks/UseAxiosCommon";
 const Registation = () => {
     const navigate=useNavigate()
     const {createUser,logout}=useContext(AuthContext)
@@ -33,7 +34,13 @@ const Registation = () => {
     }
    
     createUser(email,password)
-    .then(result=>{
+    .then(async result=>{
+      const userData={
+        name:result?.user?.displayName,
+        email:result?.user?.email
+      }
+     const {data}=await axiosCommon.post('/users',userData)
+     console.log(data);
         toast.success('regesistration success')
         navigate('/login')
         logout()

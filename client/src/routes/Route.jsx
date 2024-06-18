@@ -17,6 +17,11 @@ import EditReview from "../pages/dashboard/userMenu/myreview/EditReview";
 import PaymentHistory from "../pages/dashboard/userMenu/payment/PaymentHistory";
 import ErrorPage from "../pages/error page/ErrorPage";
 import RequestedMeal from "../pages/dashboard/userMenu/requestedmeals/RequestedMeal";
+import ManageUser from "../pages/dashboard/AdminMenu/ManageUser";
+import AddMeal from "../pages/dashboard/AdminMenu/addmeal/AddMeal";
+import Allmeals from "../pages/dashboard/AdminMenu/allmeal/Allmeals";
+import Allreview from "../pages/dashboard/AdminMenu/allreview/Allreview";
+import Servemeal from "../pages/dashboard/AdminMenu/servemeal/Servemeal";
 
 const router = createBrowserRouter([
   {
@@ -90,10 +95,34 @@ const router = createBrowserRouter([
         element: <RequestedMeal />,
       }
       ,
-      // admin dashboard 
-      // {
-      //   path:''
-      // }
+      // admin dashboard -----------------------------------------
+      {
+        path:'ManageUsers',
+        element:<ManageUser/>
+      }
+      ,
+      {
+        path:'addmeal',
+        element:<AddMeal/>
+      }
+      
+      ,
+      {
+        path:'allmeals',
+        element:<Allmeals/>
+      }
+      
+      ,
+      {
+        path:'allreview',
+        element:<Allreview/>
+      }
+      ,
+      {
+        path:'servemeal',
+        element:<Servemeal/>
+      }
+      
     ],
   },
 ]);
