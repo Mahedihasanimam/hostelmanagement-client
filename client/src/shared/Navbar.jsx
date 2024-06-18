@@ -94,12 +94,12 @@ const Navbar = () => {
               role="button"
               className="btn btn-ghost lg:hidden"
             >
-              {navOpen ? <RxCross2 size={25} /> : <GiHamburgerMenu size={25} />}
+              {navOpen ? <GiHamburgerMenu size={25}/> : <RxCross2 size={25}  />}
             </div>
             <ul
               tabIndex={0}
-              className={`menu h-screen text-black dropdown-content ${
-                navOpen ? "-ml-4" : "-ml-60  "
+              className={`menu h-screen text-black w-screen -left-4 dropdown-content absolute   ${
+                navOpen && "-translate-x-full "
               } transition-all ease-in-out duration-1000  mt-2  z-[999] p-2 shadow bg-base-100 rounded-sm  w-52`}
             >
               {navigation}

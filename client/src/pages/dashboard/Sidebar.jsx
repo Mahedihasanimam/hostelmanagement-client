@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import UseAuth from "../../hooks/UseAuth"
 import { Link } from "react-router-dom"
 import { LuMenu } from "react-icons/lu";
@@ -10,16 +10,20 @@ import UserMenu from "./userMenu/UserMenu"
 import AdminMenu from "./AdminMenu/AdminMenu"
 import { RxCross2 } from "react-icons/rx";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { useQuery } from "@tanstack/react-query";
+import { AxiosSecure } from "../../hooks/UseAxiosSecure";
+import UseAdmin from "../../hooks/UseAdmin";
 const Sidebar = () => {
   const { logout } = UseAuth()
- 
   // const [toggle, setToggle] = useState(false)
   const [isActive, setActive] = useState( true)
+  const isAdmin=UseAdmin()
+  console.log(isAdmin==='admin');
+  // const [isAdmin,setisAdmin]=
   // Sidebar Responsive Handler
   const handleToggle = () => {
     setActive(!isActive)
   }
-  const isAdmin=true
   return (
     <div className="flex gap-6 ">
       {/* Small Screen Navbar */}
@@ -69,7 +73,7 @@ const Sidebar = () => {
 
           {/* Nav Items */}
           {
-            isAdmin&&<AdminMenu/> || <UserMenu/>
+            isAdmin==='admin'&&<AdminMenu/> || <UserMenu/>
           }
           
           
