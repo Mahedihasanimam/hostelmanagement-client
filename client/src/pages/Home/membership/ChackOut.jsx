@@ -15,7 +15,7 @@ const ChackOut = () => {
         <Elements stripe={stripePromise}>
         <div className="my-28">
            <div className="lg:w-1/2 md:w-1/2 w-full px-4 mx-auto   space-y-2 ">
-            <h3 className="text-center font-bold text-xl pb-2">purchase monthly membership</h3>
+            <h3 className="text-center font-bold text-xl pb-2">purchase monthly <span className="text-blue-600">{name}</span> membership</h3>
             <hr />
             <p className="">order summary</p>
             <hr />
@@ -37,7 +37,7 @@ const ChackOut = () => {
             </p>
             <br />
             <strong>Payment Details</strong>
-            <ChackOutForm price={price}/>
+            <ChackOutForm price={price} name={name}/>
             {/* stripe payment mehode  */}
 
                 <div className="text-center space-y-4">

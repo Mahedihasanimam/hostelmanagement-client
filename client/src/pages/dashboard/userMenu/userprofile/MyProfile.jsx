@@ -1,16 +1,17 @@
 import UseAuth from "../../../../hooks/UseAuth"
 
 import cover from "../../../../assets/851x315-french-sky-blue-solid-color-background.jpg"
+import UseAdmin from "../../../../hooks/UseAdmin"
 const MyProfile = () => {
   const { user } = UseAuth()
+const isAdmin=UseAdmin()
 
-  console.log(user)
   return (
     <div className='flex justify-center items-center h-screen'>
       {/* <Helmet>
         <title>MyProfile</title>
       </Helmet> */}
-      <div className='bg-white shadow-lg rounded-2xl w-3/5'>
+      <div className='bg-white shadow-lg rounded-2xl lg:w-3/5 w-full mx-4'>
         <img
           alt='profile'
           src={cover}
@@ -26,14 +27,17 @@ const MyProfile = () => {
           </a>
 
           <p className='p-2 px-4 text-xs text-white bg-blue-500 rounded-full'>
-            Admin
+            {
+            isAdmin?'Admin':'Normal user'}
           </p>
 
           {/*TODO//= daynamic valu */}
-          <p>
+          {
+            isAdmin&&<p>
             
             0 meal added
           </p>
+          }
           <p className='mt-2 text-xl font-medium text-gray-800 '>
             User Id: {user.uid}
           </p>
@@ -42,7 +46,7 @@ const MyProfile = () => {
               <p className='flex '>
                <span> Name </span>
                 <span className='font-bold text-black '>
-                 :  {user.displayName}
+                 :  {user.displayName || 'no name found'}
                 </span>
               </p>
               <p className='flex '>

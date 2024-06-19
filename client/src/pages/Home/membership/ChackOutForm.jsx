@@ -1,109 +1,110 @@
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import Swal from "sweetalert2"
+import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
+import Swal from "sweetalert2";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure";
 import UseAuth from "../../../hooks/UseAuth";
-// import UseCard from "../../../hooks/UseCard";
 
 
-const ChackOutForm = ({price}) => {
-  const {user}=UseAuth()
-  const [error,seterror]=useState('')
-  const [transectionId,setTransectionId]=useState('')
+const ChackOutForm = ({ price, name }) => {
+  const { user } = UseAuth();
+  const [error, setError] = useState('');
+  const [transactionId, setTransactionId] = useState('');
+  const [clientSecret, setClientSecret] = useState('');
+  const AxiosSecure = UseAxiosSecure();
 
-  const [clientSecret,setClientSecret]=useState('')
-  const AxiosSecure=UseAxiosSecure()
-  
-  useEffect(()=>{
-      AxiosSecure.post(`/create-payment-intent`,{price:price})
-      .then(res=>{
-        setClientSecret(res.data.clientSecret)
-       
-      })
-      
-  },[AxiosSecure,price])
+  useEffect(() => {
+    AxiosSecure.post(`/create-payment-intent`, { price: price })
+      .then(res => {
+        setClientSecret(res.data.clientSecret);
+      });
+  }, [AxiosSecure, price]);
 
-  // console.log(clientSecret);
-  // const [card]=UseCard()
-    const stripe=useStripe()
-    const elements=useElements()
-    const handleSubmit=async(e)=>{
-        e.preventDefault()
-        if(!stripe || !elements){
-            return
-        }
-        const card=elements.getElement(CardElement)
-        if(card==null){
-            return
-        }
+  const stripe = useStripe();
+  const elements = useElements();
 
-        const {error,paymentMethod}=await stripe.createPaymentMethod({
-            type:'card',
-            card
-        })
-        if(error){
-          seterror(error.message)
-          Swal.fire({
-            position: "top-end",
-            icon: "error",
-            title: error.message,
-            showConfirmButton: false,
-            timer: 2000
-          });
-            
-        }else{
-          seterror('')
-            console.log('paymentmethod',paymentMethod);
-        }
-        const {paymentIntent,error:confirmerror}=await stripe.confirmCardPayment(clientSecret,{
-          payment_method:{
-            card:card,
-            billing_details:{
-              name:user?.displayName || 'name not found',
-              email:user?.email ||'email not found'
-            }
-          }
-        })
+  // const updateUserBadge = async () => {
+  //   try {
+  //     const { data } = await AxiosSecure.patch(`/users/badge/${user?._id}`);
+  //     console.log("Badge updated:", data);
+  //   } catch (error) {
+  //     console.error("Error updating badge:", error);
+  //   }
+  // };
 
-        if(confirmerror){
-          seterror(confirmerror.message)
-          Swal.fire({
-              position: "top-end",
-              icon: "error",
-              title: confirmerror.message,
-              showConfirmButton: false,
-              timer: 2000
-            });
-     
-        }
-        else{
-          if(paymentIntent.status==='succeeded'){
-            setTransectionId(paymentIntent.id)
-            seterror('')
-            Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "payment success!",
-                showConfirmButton: false,
-                timer: 2000
-              });
-
-              const paymentData={
-                email:user?.email,
-                price,
-                transectionId:transectionId,
-                date:new Date().toLocaleDateString()
-              }
-              const {data}=await AxiosSecure.post(`/payment`,paymentData)
-              console.log(data);
-          }
-
-          console.log('confirm payment',paymentIntent);
-        }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!stripe || !elements) {
+      return;
     }
-    return (
-        <form onSubmit={handleSubmit}>
+    const card = elements.getElement(CardElement);
+    if (card == null) {
+      return;
+    }
+
+    const { error: paymentMethodError, paymentMethod } = await stripe.createPaymentMethod({
+      type: 'card',
+      card
+    });
+    if (paymentMethodError) {
+      setError(paymentMethodError.message);
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: paymentMethodError.message,
+        showConfirmButton: false,
+        timer: 2000
+      });
+    } else {
+      setError('');
+      console.log('paymentMethod', paymentMethod);
+    }
+
+    const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: card,
+        billing_details: {
+          name: user?.displayName || 'name not found',
+          email: user?.email || 'email not found'
+        }
+      }
+    });
+
+    if (confirmError) {
+      setError(confirmError.message);
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: confirmError.message,
+        showConfirmButton: false,
+        timer: 2000
+      });
+    } else {
+      if (paymentIntent.status === 'succeeded') {
+        setTransactionId(paymentIntent.id);
+        setError('');
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Payment success!",
+          showConfirmButton: false,
+          timer: 2000
+        });
+
+        const paymentData = {
+          email: user?.email,
+          price,
+          transactionId: paymentIntent.id,
+          date: new Date().toLocaleDateString()
+        };
+        await AxiosSecure.post(`/payment`, paymentData);
+        await updateUserBadge();
+      }
+      console.log('confirm payment', paymentIntent);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
       <CardElement
         options={{
           style: {
@@ -122,17 +123,13 @@ const ChackOutForm = ({price}) => {
       />
       <p className="text-red-600">{error}</p>
       {
-        transectionId && <p className="text-green-500">your transection id : {transectionId}</p>
+        transactionId && <p className="text-green-500">Your transaction id: {transactionId}</p>
       }
-      <button className="btn bg-blue-400 hover:bg-blue-400 text-white font-bold px-8
-       mt-4" type="submit" disabled={!stripe || !clientSecret}>
-        pay
+      <button className="btn bg-blue-400 hover:bg-blue-400 text-white font-bold px-8 mt-4" type="submit" disabled={!stripe || !clientSecret}>
+        Pay
       </button>
     </form>
-    );
-
-    
-    
+  );
 };
 
 export default ChackOutForm;

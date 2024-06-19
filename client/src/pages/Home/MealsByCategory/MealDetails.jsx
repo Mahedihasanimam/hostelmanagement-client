@@ -10,14 +10,18 @@ import useAxiosCommon from "../../../hooks/UseAxiosCommon";
 import Swal from "sweetalert2";
 import MealReview from "../../../components/mealreview/MealReview";
 import ReviewCard from "../../../components/mealreview/ReviewCard";
+import UseLike from "../../../hooks/UseLike";
 
 const MealDetails = () => {
   const { user } = UseAuth();
+  console.log(user);
+  const [totallike]=UseLike()
+
   const data = useLoaderData();
   const axiosCommon = useAxiosCommon();
   const [mealreview, isLoading, refetch] = MealReview();
 
-  const [likeCount, setLikeCount] = useState(0);
+  const [likeCount, setLikeCount] = useState(1);
   console.log(likeCount);
 
   const {
@@ -32,7 +36,12 @@ const MealDetails = () => {
     post_time,
     _id,
   } = data.data;
+  const mylike=totallike.filter(item=>item._id===_id)
+  console.log(mylike);
 
+const mylikeCount=mylike.map(item=>item.like);
+
+ 
   const handlereview = async (e) => {
     e.preventDefault();
 
@@ -67,11 +76,17 @@ const MealDetails = () => {
       refetch();
     }
   };
-  const handleLikeCount = async () => {
-    setLikeCount(likeCount + 1);
-
-    const { data } = await axiosCommon.put(`/meals`, likeCount);
-    console.log(data);
+  const handleLikeCount = async (id) => {
+    refetch()
+    setLikeCount(+ 1);
+    const likedata={
+      email:user?.email,
+      mealid:_id,
+      like:likeCount
+    }
+   
+    const { data } = await axiosCommon.patch(`/like/${id}`, likedata);
+   console.log(data);
   };
 
   const handlemealreauest = async (e) => {
@@ -118,17 +133,17 @@ const MealDetails = () => {
                 {mealreview.filter((i) => i.reviewId === _id).length}
               </strong>
 
-              <button disabled={!user}>
+              <button
+              onClick={()=>handleLikeCount(_id)}
+               disabled={!user}>
                 <BiLike
-                  onClick={() => {
-                    handleLikeCount();
-                  }}
+                  
                   className={`cursor-pointer  lg:mr-8 ${
-                    likeCount ? "text-blue-500 disabled" : ""
+                    mylikeCount ? "text-blue-500 disabled" : ""
                   } ${!user && "cursor-not-allowed"}`}
                   size={70}
                 />
-                <p>Like {likeCount}</p>
+                <p>Like {mylikeCount}</p>
                 {!user && <p>login first to like this</p>}
               </button>
             </div>

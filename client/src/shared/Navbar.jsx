@@ -138,7 +138,7 @@ const Navbar = () => {
                   className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 space-y-2"
                 >
                   <p className="bg-[#3B82F6] rounded-md p-2 text-white font-bold">
-                    <p>{user?.displayName}</p>
+                    <p>{user?.displayName || 'name not found'}</p>
                   </p>
                   <li>
                     <Link

@@ -17,7 +17,7 @@ const UserMenu = () => {
                 end
                 className={({ isActive }) =>
                   `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-[#60A5FA] hover:text-white   hover: ${
-                    isActive ? 'bg-[#60A5FA]  ' : 'text-gray-600'
+                    isActive ? 'bg-[#60A5FA] text-white ' : 'text-gray-600'
                   }`
                 }
               >
@@ -31,7 +31,7 @@ const UserMenu = () => {
                 to='requestedmeals'
                 className={({ isActive }) =>
                   `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-[#60A5FA] hover:text-white   hover: ${
-                    isActive ? 'bg-[#60A5FA]  ' : 'text-gray-600'
+                    isActive ? 'bg-[#60A5FA] text-white ' : 'text-gray-600'
                   }`
                 }
               >
@@ -44,7 +44,7 @@ const UserMenu = () => {
                 to='myreview'
                 className={({ isActive }) =>
                   `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-[#60A5FA] hover:text-white  hover: ${
-                    isActive ? 'bg-[#60A5FA]  ' : 'text-gray-600'
+                    isActive ? 'bg-[#60A5FA] text-white ' : 'text-gray-600'
                   }`
                 }
               >

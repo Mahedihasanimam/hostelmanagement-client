@@ -52,7 +52,7 @@ const ManageUser = () => {
       <div className="overflow-x-auto min-h-screen my-8 px-4">
         <table className="table">
           {/* head */}
-          <thead className="bg-blue-100 text-black">
+          <thead className="bg-blue-100 text-black ">
             <tr>
               <th>email</th>
               <th>name</th>
@@ -62,7 +62,7 @@ const ManageUser = () => {
           </thead>
           <tbody>
             {users.map((reco) => (
-              <tr className="even:text-black" key={reco._id}>
+              <tr className="even:text-black even:bg-blue-50" key={reco._id}>
                 {/* row 1 */}
 
                 <td>{reco.email}</td>
@@ -81,7 +81,7 @@ const ManageUser = () => {
 
                  
                 </td>
-                <td>Gold</td>
+                <td>{reco.badge}</td>
               </tr>
             ))}
           </tbody>

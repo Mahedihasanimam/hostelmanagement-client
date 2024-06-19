@@ -19,7 +19,7 @@ const AdminMenu = ({isAdmin}) => {
                 end
                 className={({ isActive }) =>
                   `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-[#60A5FA] hover:text-white   hover: ${
-                    isActive ? 'bg-[#60A5FA]  ' : 'text-gray-600'
+                    isActive ? 'bg-[#60A5FA] text-white ' : 'text-gray-600'
                   }`
                 }
               >
@@ -33,7 +33,7 @@ const AdminMenu = ({isAdmin}) => {
                 to='ManageUsers'
                 className={({ isActive }) =>
                   `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-[#60A5FA] hover:text-white   hover: ${
-                    isActive ? 'bg-[#60A5FA]  ' : 'text-gray-600'
+                    isActive ? 'bg-[#60A5FA] text-white  ' : 'text-gray-600'
                   }`
                 }
               >
@@ -46,7 +46,7 @@ const AdminMenu = ({isAdmin}) => {
                 to='addMeal'
                 className={({ isActive }) =>
                   `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-[#60A5FA] hover:text-white  hover: ${
-                    isActive ? 'bg-[#60A5FA]  ' : 'text-gray-600'
+                    isActive ? 'bg-[#60A5FA] text-white ' : 'text-gray-600'
                   }`
                 }
               >
