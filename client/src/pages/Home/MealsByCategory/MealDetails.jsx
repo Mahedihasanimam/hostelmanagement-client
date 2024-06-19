@@ -11,11 +11,14 @@ import Swal from "sweetalert2";
 import MealReview from "../../../components/mealreview/MealReview";
 import ReviewCard from "../../../components/mealreview/ReviewCard";
 import UseLike from "../../../hooks/UseLike";
+import UseCard from "../../../hooks/UseCard";
 
 const MealDetails = () => {
   const axiosCommon = useAxiosCommon();
   const { user } = UseAuth();
   const [totallike]=UseLike()
+  const [card]=UseCard()
+
   const data = useLoaderData();
   const [mealreview, isLoading, refetch] = MealReview();
 
@@ -37,6 +40,8 @@ const MealDetails = () => {
   } = data.data;
   const mylike=totallike.filter(item=>item._id===_id)
   console.log(mylike);
+  const mycard=card.filter(item=>item._id===_id)
+  console.log(mycard.map(i=>i.like));
 
 const mylikeCount=mylike.map(item=>item.like);
 
@@ -52,7 +57,7 @@ const mylikeCount=mylike.map(item=>item.like);
     const date = new Date().toLocaleDateString();
 
     const mealreviewData = {
-      likeCount,
+      likeCount:mycard.map(i=>i.like),
       title,
       review,
       email,
@@ -78,7 +83,7 @@ const mylikeCount=mylike.map(item=>item.like);
   };
   const handleLikeCount = async (id) => {
     setBg(!bg)
-    refetch()
+   
     setLikeCount(+ 1);
     const likedata={
       email:user?.email,
@@ -87,12 +92,13 @@ const mylikeCount=mylike.map(item=>item.like);
     }
    
     const { data } = await axiosCommon.patch(`/like/${id}`, likedata);
+    
+    refetch()
    console.log(data);
   };
 
   const handlemealreauest = async (e) => {
     const mealReqData={
-      like:likeCount,
       email:user?.email,
       e
     }
@@ -144,7 +150,7 @@ const mylikeCount=mylike.map(item=>item.like);
                   } ${!user && "cursor-not-allowed"}`}
                   size={70}
                 />
-                <p>Like {mylikeCount}</p>
+                <span className="flex gap-1 justify-start">Like {mycard.map(i=><span>{i.like}</span>)}</span>
                 {!user && <p>login first to like this</p>}
               </button>
             </div>

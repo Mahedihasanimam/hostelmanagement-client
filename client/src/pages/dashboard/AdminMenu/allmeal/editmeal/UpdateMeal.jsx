@@ -1,12 +1,25 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import UseAuth from "../../../../hooks/UseAuth";
-import axios from "axios";
-import { AxiosSecure } from "../../../../hooks/UseAxiosSecure";
+import { useState } from "react";
+import UseAuth from "../../../../../hooks/UseAuth";
+import UseAxiosSecure, { AxiosSecure } from "../../../../../hooks/UseAxiosSecure";
 import Swal from "sweetalert2";
+import { useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
+import UseCard from "../../../../../hooks/UseCard";
+import { useQuery } from "@tanstack/react-query";
 
-const MealForm = () => {
-  const { user } = UseAuth();
+const UpdateMeal = () => {
+    const {id}=useParams()
+       
+    const AxiosSecure=UseAxiosSecure()
+    const {data:card=[],isLoading }=useQuery({
+        queryKey:['card',id],
+        queryFn:async()=>{
+            const res=await AxiosSecure.get(`/meals/:${id}`)
+            return res.data
+        }
+    })
+console.log(card);
+    const { user } = UseAuth();
   const [imageurl,setimageurl]=useState('')
   const {
     register,
@@ -68,9 +81,9 @@ formData.append("image", image);
     
     
   };
-
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    return (
+        <div>
+            <form onSubmit={handleSubmit(onSubmit)}>
       <div className="p-4">
         <div className="space-y-6">
           <div className="space-y-1 text-sm">
@@ -242,7 +255,8 @@ formData.append("image", image);
         Save & Continue
       </button>
     </form>
-  );
+        </div>
+    );
 };
 
-export default MealForm;
+export default UpdateMeal;

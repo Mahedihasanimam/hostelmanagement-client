@@ -13,7 +13,9 @@ const RequestedMeal = () => {
     },
   });
   // console.log(reqMeal.e?.email);
+  console.log(reqMeal);
 const myReqMeal=reqMeal.filter(i=>i.email===user?.email)
+
   const handleRequestMealDelete = (id) => {
     Swal.fire({
         title: "Are you sure?",
@@ -44,7 +46,7 @@ const myReqMeal=reqMeal.filter(i=>i.email===user?.email)
         }
       });
   };
-
+// console.log('slkdjfldfj',myReqMeal[0].e);
   return (
     <div>
       <div className="overflow-x-auto min-h-screen my-8 px-4">
@@ -66,9 +68,9 @@ const myReqMeal=reqMeal.filter(i=>i.email===user?.email)
               <tr className="even:text-black" key={reco._id}>
                
 
-                <td>{reco.e?.title}</td>
-                <td>{reco.like}</td>
-                <td>{reco.e?.details?.slice(0, 50)}</td>
+                <td>{reco?.e?.title}</td>
+                <td>{reco?.e?.like ||'0'}</td>
+                <td>{reco?.e?.details?.slice(0, 50)}</td>
                 <td><button className="btn btn-sm bg-blue-500 text-white rounded-full">pending</button></td>
                 {/* <td>{reco.email}</td> */}
                 <th>

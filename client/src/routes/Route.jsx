@@ -23,6 +23,7 @@ import Allmeals from "../pages/dashboard/AdminMenu/allmeal/Allmeals";
 import Allreview from "../pages/dashboard/AdminMenu/allreview/Allreview";
 import Servemeal from "../pages/dashboard/AdminMenu/servemeal/Servemeal";
 import PrivateRoute from "./PrivateRoute";
+import UpdateMeal from "../pages/dashboard/AdminMenu/allmeal/editmeal/UpdateMeal";
 
 const router = createBrowserRouter([
   {
@@ -129,6 +130,11 @@ const router = createBrowserRouter([
       {
         path:'servemeal',
         element:<Servemeal/>
+      }
+      ,
+      {
+        path:'updatemeal/:id',
+        element:<UpdateMeal/>
       }
       
     ]

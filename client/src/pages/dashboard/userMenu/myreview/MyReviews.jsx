@@ -70,13 +70,13 @@ const MyReviews = () => {
                        {reco.title}
                    
                     </td>
-                    <td>{totallike.find(item=>item.like).like}</td> 
+                    <td>{reco.likeCount}</td> 
              
                     <td>
                        {reco.review.slice(0,100)}
                     </td>
                     <th>
-                   <Link to={`/details/${reco._id}`}>
+                    <Link to={`/details/${reco._id}`}>
                    <button className='btn btn-sm rounded-full bg-blue-500 text-white text-lg '>View Meal</button>
                    </Link>
                     </th>
