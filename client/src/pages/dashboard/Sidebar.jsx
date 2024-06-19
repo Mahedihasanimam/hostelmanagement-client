@@ -18,7 +18,7 @@ const Sidebar = () => {
   // const [toggle, setToggle] = useState(false)
   const [isActive, setActive] = useState(true);
   const isAdmin = UseAdmin();
-  console.log(isAdmin);
+  console.log(isAdmin[0].admin);
   // const [isAdmin,setisAdmin]=
   // Sidebar Responsive Handler
   const handleToggle = () => {
@@ -72,7 +72,7 @@ const Sidebar = () => {
           </div>
 
           {/* Nav Items */}
-          {isAdmin ? <AdminMenu /> : <UserMenu />}
+          {isAdmin[0].admin ? <AdminMenu /> : <UserMenu />}
         </div>
 
         <div>

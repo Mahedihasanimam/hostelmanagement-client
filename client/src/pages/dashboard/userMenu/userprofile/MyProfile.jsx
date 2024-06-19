@@ -28,12 +28,12 @@ const isAdmin=UseAdmin()
 
           <p className='p-2 px-4 text-xs text-white bg-blue-500 rounded-full'>
             {
-            isAdmin?'Admin':'Normal user'}
+            isAdmin[0].admin ?'Admin':'Normal user'}
           </p>
 
           {/*TODO//= daynamic valu */}
           {
-            isAdmin&&<p>
+            isAdmin[0].admin &&<p>
             
             0 meal added
           </p>

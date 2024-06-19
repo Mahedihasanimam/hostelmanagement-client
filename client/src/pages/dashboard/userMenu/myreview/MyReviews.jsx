@@ -8,11 +8,13 @@ import MyButton from '../../../../components/MyButton';
 import Swal from 'sweetalert2';
 import { axiosCommon } from '../../../../hooks/UseAxiosCommon';
 import { Link } from 'react-router-dom';
+import UseLike from '../../../../hooks/UseLike';
 const MyReviews = () => {
   const {user}=UseAuth()
-
   const [mealreview,isLoading,refetch]=MealReview()
   const mymealreview=mealreview.filter(i=>i.email===user?.email)
+
+  const [totallike]=UseLike()
   
 
   const handleMyReviewDelete=async(id)=>{
@@ -68,16 +70,14 @@ const MyReviews = () => {
                        {reco.title}
                    
                     </td>
-                    <td>
-                        {reco.likeCount}
-                    </td>
+                    <td>{totallike.find(item=>item.like).like}</td> 
              
                     <td>
                        {reco.review.slice(0,100)}
                     </td>
                     <th>
                    <Link to={`/details/${reco._id}`}>
-                   <button className='btn btn-sm rounded-full bg-blue-500 text-white'>View Meal</button>
+                   <button className='btn btn-sm rounded-full bg-blue-500 text-white text-lg '>View Meal</button>
                    </Link>
                     </th>
                   

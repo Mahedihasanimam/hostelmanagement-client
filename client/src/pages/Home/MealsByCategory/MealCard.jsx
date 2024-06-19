@@ -11,7 +11,7 @@ const MealCard = ({ item }) => {
         <div>
           <div className="px-2">
             <h3 className="font-bold text-lg">dishes item-{title}</h3>
-            <p>Price : {price}</p>
+            <p>Price : ${price}</p>
             <Rating style={{ maxWidth: 80 }} value={rating} readOnly />
           </div>
 

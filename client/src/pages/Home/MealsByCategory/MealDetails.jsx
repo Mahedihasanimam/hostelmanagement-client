@@ -13,15 +13,14 @@ import ReviewCard from "../../../components/mealreview/ReviewCard";
 import UseLike from "../../../hooks/UseLike";
 
 const MealDetails = () => {
-  const { user } = UseAuth();
-  console.log(user);
-  const [totallike]=UseLike()
-
-  const data = useLoaderData();
   const axiosCommon = useAxiosCommon();
+  const { user } = UseAuth();
+  const [totallike]=UseLike()
+  const data = useLoaderData();
   const [mealreview, isLoading, refetch] = MealReview();
 
   const [likeCount, setLikeCount] = useState(1);
+  const [bg,setBg]=useState()
   console.log(likeCount);
 
   const {
@@ -74,9 +73,11 @@ const mylikeCount=mylike.map(item=>item.like);
       });
       e.target.review.value = "";
       refetch();
+
     }
   };
   const handleLikeCount = async (id) => {
+    setBg(!bg)
     refetch()
     setLikeCount(+ 1);
     const likedata={
@@ -135,11 +136,11 @@ const mylikeCount=mylike.map(item=>item.like);
 
               <button
               onClick={()=>handleLikeCount(_id)}
-               disabled={!user}>
+               disabled={!user || bg}>
                 <BiLike
                   
                   className={`cursor-pointer  lg:mr-8 ${
-                    mylikeCount ? "text-blue-500 disabled" : ""
+                    bg ? "text-blue-500  " : ""
                   } ${!user && "cursor-not-allowed"}`}
                   size={70}
                 />
@@ -153,19 +154,13 @@ const mylikeCount=mylike.map(item=>item.like);
               </h3>
               <div className="">
                 <div>
-                  <p>Price : {price}</p>
+                  <p>Price : ${price}</p>
                   <Rating style={{ maxWidth: 80 }} value={rating} readOnly />
                   <p>AddBy: {distributor}</p>
                   <p>Date-{post_time}</p>
                   <div className="flex flex-wrap gap-2">
                     <strong>ingredients</strong>
-                    {ingredients.map((i) => (
-                      <p key={i._id}>
-                        <button className="btn btn-xs bg-blue-200 hover:bg-blue-200">
-                          {i}
-                        </button>
-                      </p>
-                    ))}
+                    {ingredients}
                   </div>
                 </div>
               </div>

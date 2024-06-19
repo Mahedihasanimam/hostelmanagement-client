@@ -69,7 +69,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: <PrivateRoute><Dashboard /></PrivateRoute>,
     children: [
       //user dashboard
       {
@@ -96,7 +96,14 @@ const router = createBrowserRouter([
         element: <RequestedMeal />,
       }
       ,
-      // admin dashboard -----------------------------------------
+      
+    ],
+  },
+  // admin dashboard -----------------------------------------
+  {
+    path:'/dashboard',
+    element:<PrivateRoute><Dashboard/></PrivateRoute>,
+    children:[
       {
         path:'ManageUsers',
         element:<ManageUser/>
@@ -124,8 +131,8 @@ const router = createBrowserRouter([
         element:<Servemeal/>
       }
       
-    ],
-  },
+    ]
+  }
 ]);
 
 export default router;

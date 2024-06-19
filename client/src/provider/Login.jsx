@@ -10,6 +10,7 @@ import loginimage from "../assets/login_side_imag.svg";
 import loginlogo from "../assets/logo.png"
 import UseAuth from "../hooks/UseAuth";
 import { axiosCommon } from "../hooks/UseAxiosCommon";
+import Swal from "sweetalert2";
 
 
 const Login = () => {
@@ -34,10 +35,23 @@ const Login = () => {
     login(email,password)
     .then(result=>{
         navigate(location.state || "/")
-        
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "login success!!",
+          showConfirmButton: false,
+          timer: 2000,
+        });
     })
     .catch(err=>{
       toast.error('something wrong')
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: err.message.slice(10,98),
+        showConfirmButton: false,
+        timer: 4000,
+      });
         
     })
   };
@@ -51,7 +65,13 @@ const handlegoolelogin=()=>{
      const {data}=await axiosCommon.post('/users',userData)
      console.log(data);
       navigate(location.state || "/")
-      toast.success('Login successfully')
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "login success!!",
+        showConfirmButton: false,
+        timer: 2000,
+      });
         
     })
     .catch(err=>{

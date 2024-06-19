@@ -1,10 +1,12 @@
 import { CgProfile } from "react-icons/cg";
-import { GiAllForOne, GiMeal, GiPayMoney } from "react-icons/gi";
+import { GiAllForOne } from "react-icons/gi";
 import { MdEggAlt, MdNoMeals, MdRateReview, MdSetMeal } from "react-icons/md";
 import { RiUserSearchLine } from "react-icons/ri";
 import { NavLink } from "react-router-dom";
-
-
+import { GiMeal } from "react-icons/gi";
+import { MdUpcoming } from "react-icons/md";
+import { SiIfood } from "react-icons/si";
+import { FaUsersCog } from "react-icons/fa";
 const AdminMenu = ({isAdmin}) => {
     return (
         <div>
@@ -37,7 +39,7 @@ const AdminMenu = ({isAdmin}) => {
                   }`
                 }
               >
-                <RiUserSearchLine className='w-5 h-5' />
+                <FaUsersCog className='w-5 h-5' />
 
                 <span className='mx-4 font-medium'>ManageUsers</span>
               </NavLink>
@@ -63,7 +65,7 @@ const AdminMenu = ({isAdmin}) => {
                   }`
                 }
               >
-                <GiAllForOne className='w-5 h-5' />
+                <GiMeal className='w-5 h-5' />
 
                 <span className='mx-4 font-medium'> AllMeals</span>
               </NavLink>
@@ -76,7 +78,7 @@ const AdminMenu = ({isAdmin}) => {
                   }`
                 }
               >
-                <GiAllForOne className='w-5 h-5' />
+                <MdRateReview className='w-5 h-5' />
 
                 <span className='mx-4 font-medium'>  AllReviews</span>
               </NavLink>
@@ -89,7 +91,7 @@ const AdminMenu = ({isAdmin}) => {
                   }`
                 }
               >
-                <GiAllForOne className='w-5 h-5' />
+                <SiIfood className='w-5 h-5' />
 
                 <span className='mx-4 font-medium'> ServeMeals</span>
               </NavLink>
@@ -102,7 +104,7 @@ const AdminMenu = ({isAdmin}) => {
                   }`
                 }
               >
-                <GiAllForOne className='w-5 h-5' />
+                <MdUpcoming className='w-5 h-5' />
 
                 <span className='mx-4 font-medium'>  UpcomingMeals</span>
               </NavLink>
