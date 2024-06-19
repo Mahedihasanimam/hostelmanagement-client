@@ -22,6 +22,7 @@ import AddMeal from "../pages/dashboard/AdminMenu/addmeal/AddMeal";
 import Allmeals from "../pages/dashboard/AdminMenu/allmeal/Allmeals";
 import Allreview from "../pages/dashboard/AdminMenu/allreview/Allreview";
 import Servemeal from "../pages/dashboard/AdminMenu/servemeal/Servemeal";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -47,7 +48,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/chackout/:id",
-        element: <ChackOut />,
+        element: <PrivateRoute><ChackOut /></PrivateRoute>,
         loader: ({ params }) => axiosCommon(`/membership/${params.id}`),
       },
       {
