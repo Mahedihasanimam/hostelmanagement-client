@@ -71,7 +71,7 @@ const myReqMeal=reqMeal.filter(i=>i.email===user?.email)
                 <td>{reco?.e?.title}</td>
                 <td>{reco?.e?.like ||'0'}</td>
                 <td>{reco?.e?.details?.slice(0, 50)}</td>
-                <td><button className="btn btn-sm bg-blue-500 text-white rounded-full">pending</button></td>
+                <td><button className="btn btn-sm bg-red-500 hover:bg-red-500 text-white rounded-full">pending</button></td>
                 {/* <td>{reco.email}</td> */}
                 <th>
                   <button
