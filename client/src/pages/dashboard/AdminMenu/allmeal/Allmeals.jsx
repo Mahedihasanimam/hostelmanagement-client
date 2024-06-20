@@ -63,7 +63,7 @@ const Allmeals = () => {
                   <td>{reco.distributor || 'not found'}</td>
                     <td>
                   <Link to={`/details/${reco._id}`}>
-                   <button className='btn btn-sm rounded-full bg-blue-500 text-white text-lg '>View Meal</button>
+                   <button className='btn btn-sm rounded-full bg-blue-500 text-white  '>ViewMeal</button>
                   </Link>
                   
                     </td>

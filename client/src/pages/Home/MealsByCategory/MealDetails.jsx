@@ -41,7 +41,8 @@ const MealDetails = () => {
   const mylike=totallike.filter(item=>item._id===_id)
   console.log(mylike);
   const mycard=card.filter(item=>item._id===_id)
-  console.log(mycard.map(i=>i.like));
+ const review= mealreview.filter((i) => i.reviewId === _id)
+ 
 
 const mylikeCount=mylike.map(item=>item.like);
 
@@ -58,6 +59,7 @@ const mylikeCount=mylike.map(item=>item.like);
 
     const mealreviewData = {
       likeCount:mycard.map(i=>i.like),
+      reviewCount:review.length,
       title,
       review,
       email,

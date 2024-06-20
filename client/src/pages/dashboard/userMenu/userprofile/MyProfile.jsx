@@ -2,8 +2,12 @@ import UseAuth from "../../../../hooks/UseAuth"
 
 import cover from "../../../../assets/851x315-french-sky-blue-solid-color-background.jpg"
 import UseAdmin from "../../../../hooks/UseAdmin"
+import UseCard from "../../../../hooks/UseCard"
 const MyProfile = () => {
   const { user } = UseAuth()
+  const [card]=UseCard()
+  const mycard=card.filter(i=>i.email===user.email)
+
 const isAdmin=UseAdmin()
 
   return (
@@ -35,7 +39,7 @@ const isAdmin=UseAdmin()
           {
             isAdmin[0].admin &&<p>
             
-            0 meal added
+            {mycard.length} meal added
           </p>
           }
           <p className='mt-2 text-xl font-medium text-gray-800 '>
