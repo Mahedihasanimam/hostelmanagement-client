@@ -10,6 +10,7 @@ import { createContext, useEffect, useState } from "react";
 
 import axios from "axios";
 import auth from "../firebase/Firebase.config";
+import { axiosCommon } from "../hooks/UseAxiosCommon";
 
 export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
@@ -44,18 +45,20 @@ const AuthProvider = ({ children }) => {
         const loggedUser={email:userEmail}
       setuser(currentUser);
       setLoder(false);
-      console.log(currentUser);
+      console.log('CURRENT USER',currentUser);
       if(currentUser){
       
-        axios.post(`${import.meta.env.VITE_API_URL}/jwt`, loggedUser, {
+        axiosCommon.post(`/jwt`, loggedUser, {
             withCredentials: true,
           })
         .then(res=>{
-            console.log('token respons',res.data)
+           if(res.data.token){
+            localStorage.setItem('accesstoken',res.data.token)
+           }
         })
       }
       else{
-        axios.post(`${import.meta.env.VITE_API_URL}/logout`,loggedUser,{withCredentials:true})
+        axios.post(`${import.meta.env.VITE_API_URL}/logout`,loggedUser)
         .then(res=>{
             console.log(res.data)
         })

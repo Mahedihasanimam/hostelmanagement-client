@@ -13,12 +13,20 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { useQuery } from "@tanstack/react-query";
 import { FaHome } from "react-icons/fa";
 import UseAdmin from "../../hooks/UseAdmin";
+import { ImSpinner9 } from "react-icons/im";
 const Sidebar = () => {
   const { logout } = UseAuth();
   // const [toggle, setToggle] = useState(false)
   const [isActive, setActive] = useState(true);
-  const isAdmin = UseAdmin();
-  console.log(isAdmin[0].admin);
+  const [isAdmin,isLoading] = UseAdmin();
+  console.log(isAdmin.admin);
+  if(isLoading){
+    return <ImSpinner9
+    size={40}
+    className=" animate-spin absolute top-1/2 left-1/2 text-[#60A5FA]  "
+  />
+  }
+
   // const [isAdmin,setisAdmin]=
   // Sidebar Responsive Handler
   const handleToggle = () => {
@@ -72,7 +80,7 @@ const Sidebar = () => {
           </div>
 
           {/* Nav Items */}
-          {isAdmin[0].admin ? <AdminMenu /> : <UserMenu />}
+          {isAdmin.admin? <AdminMenu /> : <UserMenu />}
         </div>
 
         <div>

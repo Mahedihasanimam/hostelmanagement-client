@@ -1,15 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
-import { AxiosSecure } from "../../../hooks/UseAxiosSecure";
+import UseAxiosSecure from "../../../hooks/UseAxiosSecure";
 
 import { ImSpinner9 } from "react-icons/im";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const ManageUser = () => {
+  const AxiosSecure=UseAxiosSecure()
   const { data: users = [], isLoading,refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const { data } = await AxiosSecure(`/users`);
+      const { data } = await AxiosSecure.get(`/users`);
       return data;
     },
   });

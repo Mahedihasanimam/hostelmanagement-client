@@ -66,7 +66,7 @@ const Servemeal = () => {
           <tbody>
             {reqMeal.map((reco) => (
               
-              <tr className="even:text-black" key={reco._id}>
+              <tr className="even:text-black even:bg-blue-50" key={reco._id}>
                
 
                 <td>{reco?.e?.title}</td>

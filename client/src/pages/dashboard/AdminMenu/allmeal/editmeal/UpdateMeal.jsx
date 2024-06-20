@@ -1,8 +1,6 @@
 import { useState } from "react";
 import UseAuth from "../../../../../hooks/UseAuth";
-import UseAxiosSecure, {
-  AxiosSecure,
-} from "../../../../../hooks/UseAxiosSecure";
+import UseAxiosSecure from "../../../../../hooks/UseAxiosSecure";
 import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
 import { useLoaderData, useNavigate, useParams } from "react-router-dom";

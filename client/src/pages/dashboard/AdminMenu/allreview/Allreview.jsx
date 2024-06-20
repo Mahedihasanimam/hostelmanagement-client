@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { AxiosSecure } from "../../../../hooks/UseAxiosSecure";
+import UseAxiosSecure from "../../../../hooks/UseAxiosSecure";
 import { Link } from "react-router-dom";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { CiEdit } from "react-icons/ci";
@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import { axiosCommon } from "../../../../hooks/UseAxiosCommon";
 
 const Allreview = () => {
+  const AxiosSecure=UseAxiosSecure()
     const {data:rev=[],refetch}=useQuery({
         queryKey:['rev'],
         queryFn:async()=>{
@@ -34,7 +35,7 @@ const Allreview = () => {
             });
             
             try{
-              const {data}= await axiosCommon.delete(`${import.meta.env.VITE_API_URL}/myreview/${id}`,)
+              const {data}= await AxiosSecure.delete(`${import.meta.env.VITE_API_URL}/myreview/${id}`,)
               refetch()
             }
              catch(err){

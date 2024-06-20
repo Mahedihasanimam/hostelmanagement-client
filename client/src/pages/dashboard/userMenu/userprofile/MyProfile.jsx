@@ -8,7 +8,7 @@ const MyProfile = () => {
   const [card]=UseCard()
   const mycard=card.filter(i=>i.email===user.email)
 
-const isAdmin=UseAdmin()
+const [isAdmin]=UseAdmin()
 
   return (
     <div className='flex justify-center items-center h-screen'>
@@ -32,12 +32,12 @@ const isAdmin=UseAdmin()
 
           <p className='p-2 px-4 text-xs text-white bg-blue-500 rounded-full'>
             {
-            isAdmin[0].admin ?'Admin':'Normal user'}
+            isAdmin.admin?'Admin':'Normal user'}
           </p>
 
           {/*TODO//= daynamic valu */}
           {
-            isAdmin[0].admin &&<p>
+            isAdmin.admin&&<p>
             
             {mycard.length} meal added
           </p>

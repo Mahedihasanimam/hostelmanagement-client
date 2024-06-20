@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import UseAuth from "../../../../hooks/UseAuth";
 import axios from "axios";
-import { AxiosSecure } from "../../../../hooks/UseAxiosSecure";
+import UseAxiosSecure from "../../../../hooks/UseAxiosSecure";
 import Swal from "sweetalert2";
 
 const MealForm = () => {
+  const AxiosSecure=UseAxiosSecure()
   const { user } = UseAuth();
   const [imageurl,setimageurl]=useState('')
   const {
