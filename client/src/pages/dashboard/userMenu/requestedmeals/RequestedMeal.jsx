@@ -6,7 +6,7 @@ import UseAuth from "../../../../hooks/UseAuth";
 const RequestedMeal = () => {
   const {user}=UseAuth()
   const { data: reqMeal = [],refetch } = useQuery({
-    queryKey: ["reqmeal"],
+    queryKey: ["reqMeal"],
     queryFn: async () => {
       const { data } = await axiosCommon(`/requestedmeal`);
       return data;

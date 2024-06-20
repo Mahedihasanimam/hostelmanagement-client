@@ -25,6 +25,7 @@ import Servemeal from "../pages/dashboard/AdminMenu/servemeal/Servemeal";
 import PrivateRoute from "./PrivateRoute";
 import UpdateMeal from "../pages/dashboard/AdminMenu/allmeal/editmeal/UpdateMeal";
 import { AxiosSecure } from "../hooks/UseAxiosSecure";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -108,34 +109,34 @@ const router = createBrowserRouter([
     children:[
       {
         path:'ManageUsers',
-        element:<ManageUser/>
+        element:<AdminRoute><ManageUser/></AdminRoute>
       }
       ,
       {
         path:'addmeal',
-        element:<AddMeal/>
+        element:<AdminRoute><AddMeal/></AdminRoute>
       }
       
       ,
       {
         path:'allmeals',
-        element:<Allmeals/>
+        element:<AdminRoute><Allmeals/></AdminRoute>
       }
       
       ,
       {
         path:'allreview',
-        element:<Allreview/>
+        element:<AdminRoute><Allreview/></AdminRoute>
       }
       ,
       {
         path:'servemeal',
-        element:<Servemeal/>
+        element:<AdminRoute><Servemeal/></AdminRoute>
       }
       ,
       {
         path:'updatemeal/:id',
-        element:<UpdateMeal/>,
+        element:<AdminRoute><UpdateMeal/></AdminRoute>,
         loader:async({params})=>await AxiosSecure(`/meal/${params.id}`)
         
       }

@@ -19,16 +19,17 @@ const Sidebar = () => {
   // const [toggle, setToggle] = useState(false)
   const [isActive, setActive] = useState(true);
   const [isAdmin,isLoading] = UseAdmin();
-  console.log(isAdmin.admin);
-  if(isLoading){
-    return <ImSpinner9
-    size={40}
-    className=" animate-spin absolute top-1/2 left-1/2 text-[#60A5FA]  "
-  />
-  }
+ 
 
-  // const [isAdmin,setisAdmin]=
-  // Sidebar Responsive Handler
+
+  // if(isLoading){
+  //   return <ImSpinner9
+  //   size={40}
+  //   className=" animate-spin absolute top-1/2 left-1/2 text-[#60A5FA]  "
+  // />
+  // }
+
+
   const handleToggle = () => {
     setActive(!isActive);
   };
