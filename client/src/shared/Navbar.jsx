@@ -7,7 +7,7 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
 import logo from "../assets/logo.png";
 import { GiHamburgerMenu } from "react-icons/gi";
-
+import { FaRegUserCircle } from "react-icons/fa";
 import AOS from "aos";
 import "aos/dist/aos.css"; // You can also use <link> for styles
 // ..
@@ -129,7 +129,7 @@ const Navbar = () => {
                 <div tabIndex={0}>
                   <div className="avatar">
                     <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                      <img src={user?.photoURL} />
+                      {user?.photoURL?<img src={user?.photoURL} /> :<FaRegUserCircle size={40} className="text-white"/>}
                     </div>
                   </div>
                 </div>

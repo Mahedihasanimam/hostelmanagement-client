@@ -12,7 +12,7 @@ const Footer = () => {
 
               <div className="px-12">
                 <p className="max-w-sm mt-2 text-gray-500">
-                  Join 31,000+ other and never miss out on new tips, tutorials,
+                  Join 25,000+ other and never miss out on new tips, tutorials,
                   and more.
                 </p>
 
@@ -80,7 +80,7 @@ const Footer = () => {
               </div>
 
               <div>
-                <h3 className=" uppercase dark:text-white">Blog</h3>
+                <h3 className=" uppercase dark:text-white font-bold">Blog</h3>
                 <div className="text-gray-500">
                   <a
                     href="#"
@@ -104,31 +104,31 @@ const Footer = () => {
               </div>
 
               <div>
-                <h3 className=" uppercase dark:text-white">Services</h3>
+                <h3 className=" uppercase dark:text-white font-bold">Services</h3>
                 <div className="text-gray-500">
                   <Link
                     to={"/"}
                     className="block mt-2 text-sm dark:text-gray-400 hover:underline"
                   >
-                    AltPrductuct
+                    meal serving
                   </Link>
                   <Link
                     to={"/"}
                     className="block mt-2 text-sm dark:text-gray-400 hover:underline"
                   >
-                    FindPriduct
+                    find next meal
                   </Link>
                   <Link
                     to={"/"}
                     className="block mt-2 text-sm dark:text-gray-400 hover:underline"
                   >
-                    GetProduct
+                    get meal
                   </Link>
                 </div>
               </div>
 
               <div>
-                <h3 className=" uppercase dark:text-white">Contact</h3>
+                <h3 className=" uppercase dark:text-white font-bold">Contact</h3>
                 <div className="text-gray-500">
                   <span className="block mt-2 text-sm dark:text-gray-400 hover:underline">
                     +1 526 654 8965

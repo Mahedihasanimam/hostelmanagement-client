@@ -26,6 +26,8 @@ import PrivateRoute from "./PrivateRoute";
 import UpdateMeal from "../pages/dashboard/AdminMenu/allmeal/editmeal/UpdateMeal";
 import { AxiosSecure } from "../hooks/UseAxiosSecure";
 import AdminRoute from "./AdminRoute";
+import AddUpcomming from "../pages/dashboard/AdminMenu/addupcomming/AddUpcomming";
+import Upcomming from "../pages/dashboard/AdminMenu/upcomming/Upcomming";
 
 const router = createBrowserRouter([
   {
@@ -115,6 +117,16 @@ const router = createBrowserRouter([
       {
         path:'addmeal',
         element:<AdminRoute><AddMeal/></AdminRoute>
+      }
+      ,
+      {
+        path:'addupcommingmeal',
+        element:<AdminRoute><AddUpcomming/></AdminRoute>
+      }
+      ,
+      {
+        path:'upcommingmeals',
+        element:<AdminRoute><Upcomming/></AdminRoute>
       }
       
       ,

@@ -5,7 +5,8 @@ import UseAxiosSecure from "../../../hooks/UseAxiosSecure";
 import UseAuth from "../../../hooks/UseAuth";
 
 
-const ChackOutForm = ({ price, name }) => {
+const ChackOutForm = ({ price, name,id }) => {
+ 
   const { user } = UseAuth();
   const [error, setError] = useState('');
   const [transactionId, setTransactionId] = useState('');

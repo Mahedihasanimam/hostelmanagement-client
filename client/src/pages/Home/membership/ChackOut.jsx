@@ -1,4 +1,4 @@
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useParams } from "react-router-dom";
 import UseAuth from "../../../hooks/UseAuth";
 import MyButton from "../../../components/MyButton";
 import {loadStripe} from '@stripe/stripe-js';
@@ -8,6 +8,7 @@ import ChackOutForm from "./ChackOutForm";
 const stripePromise =loadStripe(import.meta.env.VITE_PAYMENT_GETWAY_PK)
 
 const ChackOut = () => {
+   
     const {user}=UseAuth()
     const {data}=useLoaderData()
     const {price,name,_id}=data
@@ -37,7 +38,7 @@ const ChackOut = () => {
             </p>
             <br />
             <strong>Payment Details</strong>
-            <ChackOutForm price={price} name={name}/>
+            <ChackOutForm price={price} name={name} id={_id}/>
             {/* stripe payment mehode  */}
 
                 <div className="text-center space-y-4">

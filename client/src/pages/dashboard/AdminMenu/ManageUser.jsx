@@ -82,7 +82,7 @@ const ManageUser = () => {
 
                  
                 </td>
-                <td>{reco.badge}</td>
+                <td className={`${reco.badge&& "bg-green-400 text-white"}`}>{reco.badge || 'genarel'}</td>
               </tr>
             ))}
           </tbody>

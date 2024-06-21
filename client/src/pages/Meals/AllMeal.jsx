@@ -4,11 +4,10 @@ import MealCard from "../Home/MealsByCategory/MealCard";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ImSpinner9 } from "react-icons/im";
 import TapCard from "../Home/MealsByCategory/TapCard";
-
-
+import { useQuery } from "@tanstack/react-query";
+import { axiosCommon } from "../../hooks/UseAxiosCommon";
 
 const AllMeal = () => {
-
   const [card, isLoading, fetchNextPage, hasNextPage] = UseCard();
 
   const [mealcategory, setmealcategory] = useState("allCategory");
@@ -19,12 +18,13 @@ const AllMeal = () => {
   const allCategory = card;
   const [rangeVal, setRangeVal] = useState(0);
   const [pricerange, setPricerange] = useState(0);
-  const withmyprice = card.filter((item) => item.price <=  parseInt(pricerange));
+  const withmyprice = card.filter(
+    (item) => parseInt(item.price) <= parseInt(pricerange)
+  );
 
-  
-
-
-
+  const [search, setSearch] = useState("");
+  const [searchdata, setSearchdata] = useState([]);
+  console.log(searchdata);
 
   const handleSort = async (e) => {
     e.preventDefault();
@@ -49,15 +49,17 @@ const AllMeal = () => {
     setmealcategory(e.target.value);
   };
 
-  const handlepricereange=async(e)=>{
+  const handlepricereange = async (e) => {
     setPricerange(e.target.value);
-  }
+  };
 
-  
-  // search functionality 
-  const handesearch=async(e)=>{
-    console.log(e.target.value);
-  }
+  // search functionality
+  const handesearch = async (e) => {
+    setSearch(e.target.value);
+    const { data } = await axiosCommon.get(`/meals/search?search=${search}`);
+    setSearchdata(data);
+  };
+
   return (
     <div className="mt-24">
       <div className="p-6 py-16 bg-blue-400 text-white">
@@ -65,7 +67,10 @@ const AllMeal = () => {
           <h1 className="lg:text-6xl md:text-4xl font-bold text-center">
             Search the meal data
           </h1>
-          <label onChange={handesearch} className="input max-w-4xl mx-auto mt-5 text-blue-700 input-bordered flex items-center gap-2">
+          <label
+            onChange={handesearch}
+            className="input max-w-4xl mx-auto mt-5 text-blue-700 input-bordered flex items-center gap-2"
+          >
             <input type="text" className="grow" placeholder="Search" />
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -101,7 +106,7 @@ const AllMeal = () => {
               </div>
               <h3 className="font-bold mt-6 mb-2">Filter by price range</h3>
               <input
-              onChangeCapture={handlepricereange}
+                onChangeCapture={handlepricereange}
                 type="range"
                 min={0}
                 max="1000"
@@ -111,11 +116,13 @@ const AllMeal = () => {
                 className="range range-info"
               />
               <div className="text-right flex justify-between">
-                <span>$ 0 </span>
-                ${rangeVal}
-                </div>
+                <span>$ 0 </span>${rangeVal}
+              </div>
 
-              <button disabled className="w-full bg-[#3B82F6] font-bold text-white p-1 rounded-lg mt-6">
+              <button
+                disabled
+                className="w-full bg-[#3B82F6] font-bold text-white p-1 rounded-lg mt-6"
+              >
                 Get meal
               </button>
             </div>
@@ -134,6 +141,8 @@ const AllMeal = () => {
             {mealcategory === "dinner" && <TapCard category={dinner} />}
             {mealcategory === "allMeals" && <TapCard category={allMeals} />}
             {withmyprice && <TapCard category={withmyprice} />}
+            {searchdata && <TapCard category={searchdata} />}
+
             {mealcategory === "allCategory" && (
               <TapCard category={allCategory} />
             )}

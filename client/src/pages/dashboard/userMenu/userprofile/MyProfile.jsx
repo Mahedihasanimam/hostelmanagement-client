@@ -3,6 +3,7 @@ import UseAuth from "../../../../hooks/UseAuth"
 import cover from "../../../../assets/851x315-french-sky-blue-solid-color-background.jpg"
 import UseAdmin from "../../../../hooks/UseAdmin"
 import UseCard from "../../../../hooks/UseCard"
+import { FaRegUserCircle } from "react-icons/fa";
 const MyProfile = () => {
   const { user } = UseAuth()
   const [card]=UseCard()
@@ -23,11 +24,13 @@ console.log(isAdmin);
         />
         <div className='flex flex-col items-center justify-center p-4 -mt-16'>
           <a href='#' className='relative block'>
-            <img
+            { user?.photoURL?
+              <img
               alt='profile'
-              src={user.photoURL}
+              src={user.photoURL }
               className='mx-auto object-cover rounded-full h-24 w-24  border-2 border-white '
-            />
+            />:<FaRegUserCircle className='mx-auto object-cover rounded-full h-24 w-24  border-2 border-white '/>
+            }
           </a>
 
           <p className='p-2 px-4 text-xs text-white bg-blue-500 rounded-full'>

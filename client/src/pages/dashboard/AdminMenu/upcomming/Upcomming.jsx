@@ -1,42 +1,20 @@
-import { RiDeleteBin6Line } from "react-icons/ri";
-import UseCard from "../../../../hooks/UseCard";
+import { useQuery } from "@tanstack/react-query";
+import UseAxiosSecure from "../../../../hooks/UseAxiosSecure";
 import { Link } from "react-router-dom";
+import { RiDeleteBin6Line } from "react-icons/ri";
 import { CiEdit } from "react-icons/ci";
-import Swal from "sweetalert2";
-import { axiosCommon } from "../../../../hooks/UseAxiosCommon";
 
 
-const Allmeals = () => {
-    const [card,refetch]=UseCard()
-    const handlemealDelete=async(id)=>{
-        Swal.fire({
-          title: "Are you sure?",
-          text: "You won't be able to recover this query!",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Yes, delete it!"
-        })
-        
-        .then(async(result) => {
-          if (result.isConfirmed) {
-            Swal.fire({
-              title: "Deleted!",
-              text: "Your query has been deleted.",
-              icon: "success"
-            });
-            
-            try{
-              const {data}= await axiosCommon.delete(`${import.meta.env.VITE_API_URL}/delete/meal/${id}`,)
-              refetch()
-            }
-             catch(err){
-              console.log(err)
-             }
-          }
-        });
-      }
+const Upcomming = () => {
+    const AxiosSecure=UseAxiosSecure()
+    const {data:upcommingmeals=[]}=useQuery({
+        queryKey:['upcommingmeals'],
+        queryFn:async()=>{
+            const {data}=await AxiosSecure('/upcommingmeals')
+            return data
+        }
+    })
+    console.log(upcommingmeals);
     return (
         <div>
         <div className="overflow-x-auto min-h-screen my-8 px-4">
@@ -53,7 +31,7 @@ const Allmeals = () => {
               </tr>
             </thead>
             <tbody>
-              {card.map((reco) => (
+              {upcommingmeals.map((reco) => (
                 <tr className="even:text-black even:bg-blue-50" key={reco._id}>
                   {/* row 1 */}
   
@@ -85,7 +63,7 @@ const Allmeals = () => {
           </table>
           {/* You can open the modal using document.getElementById('ID').showModal() method */}
   
-          {card.length < 1 && (
+          {upcommingmeals.length < 1 && (
             <div className="flex my-8 mx-auto  flex-row px-4 lg:w-[1000PX]  pl-4 py-2 gap-2 items-center border rounded-lg shadow overflow-hidden bg-gray-900 dark:bg-gray-50 border-violet-400 dark:border-violet-600">
               <span className="flex-shrink-0 inline-flex mx-3 item-center justify-center leading-none rounded-full bg-violet-400 dark:bg-violet-600 text-gray-900 dark:text-gray-50">
                 <svg
@@ -103,7 +81,7 @@ const Allmeals = () => {
               </span>
               <div className="flex-1  p-2 ">
                 <h1 className="lg:text-4xl text-xl font-bold text-white">
-                  Ooops! No meal Found{" "}
+                  Ooops! No upcomming meal Found{" "}
                 </h1>
               </div>
             </div>
@@ -113,4 +91,4 @@ const Allmeals = () => {
     );
 };
 
-export default Allmeals;
+export default Upcomming;
