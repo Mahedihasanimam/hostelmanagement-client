@@ -9,7 +9,7 @@ const MyProfile = () => {
   const mycard=card.filter(i=>i.email===user.email)
 
 const [isAdmin]=UseAdmin()
-
+console.log(isAdmin);
   return (
     <div className='flex justify-center items-center h-screen'>
       {/* <Helmet>
@@ -32,12 +32,12 @@ const [isAdmin]=UseAdmin()
 
           <p className='p-2 px-4 text-xs text-white bg-blue-500 rounded-full'>
             {
-            isAdmin.admin?'Admin':'Normal user'}
+            isAdmin?'Admin':'Normal user'}
           </p>
 
           {/*TODO//= daynamic valu */}
           {
-            isAdmin.admin&&<p>
+            isAdmin&&<p>
             
             {mycard.length} meal added
           </p>

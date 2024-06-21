@@ -5,15 +5,26 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { ImSpinner9 } from "react-icons/im";
 import TapCard from "../Home/MealsByCategory/TapCard";
 
+
+
 const AllMeal = () => {
+
   const [card, isLoading, fetchNextPage, hasNextPage] = UseCard();
-  const [mealcategory,setmealcategory]=useState('allCategory')
-  const breakfast=card.filter(item=>item.category==='breakfast')
-const lunch=card.filter(item=>item.category==='lunch')
-const dinner=card.filter(item=>item.category==='dinner')
-const allMeals=card.filter(item=>item.category==='allMeals')
-const allCategory=card
+
+  const [mealcategory, setmealcategory] = useState("allCategory");
+  const breakfast = card.filter((item) => item.category === "breakfast");
+  const lunch = card.filter((item) => item.category === "lunch");
+  const dinner = card.filter((item) => item.category === "dinner");
+  const allMeals = card.filter((item) => item.category === "allMeals");
+  const allCategory = card;
   const [rangeVal, setRangeVal] = useState(0);
+  const [pricerange, setPricerange] = useState(0);
+  const withmyprice = card.filter((item) => item.price <=  parseInt(pricerange));
+
+  
+
+
+
 
   const handleSort = async (e) => {
     e.preventDefault();
@@ -33,9 +44,19 @@ const allCategory=card
     );
   }
 
-  const handlecategory=async(e)=>{
-    e.preventDefault()
+  const handlecategory = async (e) => {
+    e.preventDefault();
     setmealcategory(e.target.value);
+  };
+
+  const handlepricereange=async(e)=>{
+    setPricerange(e.target.value);
+  }
+
+  
+  // search functionality 
+  const handesearch=async(e)=>{
+    console.log(e.target.value);
   }
   return (
     <div className="mt-24">
@@ -44,7 +65,7 @@ const allCategory=card
           <h1 className="lg:text-6xl md:text-4xl font-bold text-center">
             Search the meal data
           </h1>
-          <label className="input max-w-4xl mx-auto mt-5 text-blue-700 input-bordered flex items-center gap-2">
+          <label onChange={handesearch} className="input max-w-4xl mx-auto mt-5 text-blue-700 input-bordered flex items-center gap-2">
             <input type="text" className="grow" placeholder="Search" />
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -69,30 +90,32 @@ const allCategory=card
               <h3 className="font-bold mb-2">Filter category meals</h3>
               <div className="flex items-center">
                 <form onChange={handlecategory}>
-                <select  className="select select-bordered w-full max-w-xs font-bold">
-                  <option value="allCategory">AllCategory</option>
-                  <option value={'allMeals'}>
-                    All Meals
-                  </option>
-                  <option value={'breakfast'}>Breakfast</option>
-                  <option value={'lunch'}>Lunch</option>
-                  <option value={'dinner'}>Dinner</option>
-                </select>
+                  <select className="select select-bordered w-full max-w-xs font-bold">
+                    <option value="allCategory">AllCategory</option>
+                    <option value={"allMeals"}>All Meals</option>
+                    <option value={"breakfast"}>Breakfast</option>
+                    <option value={"lunch"}>Lunch</option>
+                    <option value={"dinner"}>Dinner</option>
+                  </select>
                 </form>
               </div>
               <h3 className="font-bold mt-6 mb-2">Filter by price range</h3>
               <input
+              onChangeCapture={handlepricereange}
                 type="range"
                 min={0}
-                max="50"
+                max="1000"
                 name="range"
                 value={rangeVal}
                 onChange={(e) => setRangeVal(e.target.value)}
                 className="range range-info"
               />
-              <div className="text-right">${rangeVal}</div>
+              <div className="text-right flex justify-between">
+                <span>$ 0 </span>
+                ${rangeVal}
+                </div>
 
-              <button className="w-full bg-[#3B82F6] font-bold text-white p-1 rounded-lg mt-6">
+              <button disabled className="w-full bg-[#3B82F6] font-bold text-white p-1 rounded-lg mt-6">
                 Get meal
               </button>
             </div>
@@ -102,25 +125,18 @@ const allCategory=card
           dataLength={card.length}
           next={fetchNextPage}
           hasMore={hasNextPage}
-          loader={<ImSpinner9 className="animate-spin"/>}
+          // loader={<ImSpinner9 className="animate-spin" />}
           endMessage={<p>No more data to load</p>}
         >
           <div className=" px-4 gap-4 my-12">
-            {
-              mealcategory==='breakfast' && <TapCard category={breakfast}/>
-            }
-            {
-              mealcategory==='lunch' && <TapCard category={lunch}/>
-            }
-            {
-              mealcategory==='dinner' && <TapCard category={dinner}/>
-            }
-            {
-              mealcategory==='allMeals' && <TapCard category={allMeals}/>
-            }
-            {
-              mealcategory==='allCategory' && <TapCard category={allCategory}/>
-            }
+            {mealcategory === "breakfast" && <TapCard category={breakfast} />}
+            {mealcategory === "lunch" && <TapCard category={lunch} />}
+            {mealcategory === "dinner" && <TapCard category={dinner} />}
+            {mealcategory === "allMeals" && <TapCard category={allMeals} />}
+            {withmyprice && <TapCard category={withmyprice} />}
+            {mealcategory === "allCategory" && (
+              <TapCard category={allCategory} />
+            )}
           </div>
         </InfiniteScroll>
       </div>

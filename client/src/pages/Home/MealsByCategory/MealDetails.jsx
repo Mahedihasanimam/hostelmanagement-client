@@ -16,7 +16,7 @@ import UseCard from "../../../hooks/UseCard";
 const MealDetails = () => {
   const axiosCommon = useAxiosCommon();
   const { user } = UseAuth();
-  const [totallike]=UseLike()
+  const [totallike,likerefetch]=UseLike()
   const [card]=UseCard()
 
   const data = useLoaderData();
@@ -86,6 +86,7 @@ const mylikeCount=mylike.map(item=>item.like);
   const handleLikeCount = async (id) => {
     setBg(!bg)
    
+    likerefetch()
     setLikeCount(+ 1);
     const likedata={
       email:user?.email,
@@ -93,10 +94,9 @@ const mylikeCount=mylike.map(item=>item.like);
       like:likeCount
     }
    
+    likerefetch()
     const { data } = await axiosCommon.patch(`/like/${id}`, likedata);
-    
-    refetch()
-   console.log(data);
+
   };
 
   const handlemealreauest = async (e) => {

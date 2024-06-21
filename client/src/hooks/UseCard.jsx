@@ -6,7 +6,7 @@ import UseAxiosSecure from "./UseAxiosSecure";
 
 const UseCard = () => {
     const AxiosSecure=UseAxiosSecure()
-    const {data:card=[],isLoading,fetchNextPage }=useQuery({
+    const {data:card=[],isLoading,fetchNextPage,refetch:cardreftch}=useQuery({
         queryKey:['card'],
         queryFn:async()=>{
             const res=await AxiosSecure.get('/meals')
@@ -15,7 +15,7 @@ const UseCard = () => {
     })
    
 
-    return [card,isLoading,fetchNextPage]
+    return [card,isLoading,fetchNextPage,cardreftch]
 };
 
 export default UseCard;

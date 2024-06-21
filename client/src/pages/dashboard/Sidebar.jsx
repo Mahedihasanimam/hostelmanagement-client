@@ -20,14 +20,14 @@ const Sidebar = () => {
   const [isActive, setActive] = useState(true);
   const [isAdmin,isLoading] = UseAdmin();
  
+console.log(isAdmin);
 
-
-  // if(isLoading){
-  //   return <ImSpinner9
-  //   size={40}
-  //   className=" animate-spin absolute top-1/2 left-1/2 text-[#60A5FA]  "
-  // />
-  // }
+  if(isLoading){
+    return <ImSpinner9
+    size={40}
+    className=" animate-spin absolute top-1/2 left-1/2 text-[#60A5FA]  "
+  />
+  }
 
 
   const handleToggle = () => {
@@ -81,7 +81,7 @@ const Sidebar = () => {
           </div>
 
           {/* Nav Items */}
-          {isAdmin.admin? <AdminMenu /> : <UserMenu />}
+          {isAdmin? <AdminMenu /> :<UserMenu />}
         </div>
 
         <div>

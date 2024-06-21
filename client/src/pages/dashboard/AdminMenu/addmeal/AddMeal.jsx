@@ -18,7 +18,7 @@ const MealForm = () => {
   const onSubmit = async(data) => {
     const category = data.category
     const title = data.title
-    const price = data.price
+    const price = parseInt(data.price)
     const image = data.image[0]
     const rating = parseInt(data.ratings)
     const review = data.reviews
