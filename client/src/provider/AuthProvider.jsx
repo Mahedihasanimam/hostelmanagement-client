@@ -45,7 +45,7 @@ const AuthProvider = ({ children }) => {
         const loggedUser={email:userEmail}
       setuser(currentUser);
       setLoder(false);
-      console.log('CURRENT USER',currentUser);
+      
       if(currentUser){
       
         axiosCommon.post(`/jwt`, loggedUser, {

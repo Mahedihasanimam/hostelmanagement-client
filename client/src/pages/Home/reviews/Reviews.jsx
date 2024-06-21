@@ -23,7 +23,7 @@ const Reviews = () => {
             return data
         }
     })
-    console.log(review);
+
     return (
         <div>
             <div className="text-center lg:w-1/2 mx-auto space-y-4 my-12">

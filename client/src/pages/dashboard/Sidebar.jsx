@@ -20,7 +20,7 @@ const Sidebar = () => {
   const [isActive, setActive] = useState(true);
   const [isAdmin,isLoading] = UseAdmin();
  
-console.log(isAdmin);
+
 
   if(isLoading){
     return <ImSpinner9

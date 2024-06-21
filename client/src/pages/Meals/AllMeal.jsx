@@ -31,7 +31,7 @@ const AllMeal = () => {
     const category = e.target.category.checked;
     const price = rangeVal;
 
-    console.log("Category:", category, "Price:", price);
+  
     // Add logic to filter the meals based on category and price range
   };
 

@@ -10,7 +10,7 @@ const MyProfile = () => {
   const mycard=card.filter(i=>i.email===user.email)
 
 const [isAdmin]=UseAdmin()
-console.log(isAdmin);
+
   return (
     <div className='flex justify-center items-center h-screen'>
       {/* <Helmet>

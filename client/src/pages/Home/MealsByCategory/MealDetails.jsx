@@ -1,5 +1,5 @@
 import { Rating } from "@smastrom/react-rating";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useParams } from "react-router-dom";
 import { BiLike } from "react-icons/bi";
 import MyButton from "../../../components/MyButton";
 import { useState } from "react";
@@ -12,18 +12,16 @@ import MealReview from "../../../components/mealreview/MealReview";
 import ReviewCard from "../../../components/mealreview/ReviewCard";
 import UseLike from "../../../hooks/UseLike";
 import UseCard from "../../../hooks/UseCard";
+import { useQuery } from "@tanstack/react-query";
 
 const MealDetails = () => {
   const axiosCommon = useAxiosCommon();
   const { user } = UseAuth();
-  const [totallike,likerefetch]=UseLike()
-  const [card]=UseCard()
-
+  const [card] = UseCard();
   const data = useLoaderData();
   const [mealreview, isLoading, refetch] = MealReview();
-
   const [likeCount, setLikeCount] = useState(1);
-  const [bg,setBg]=useState()
+  const [bg, setBg] = useState();
   console.log(likeCount);
 
   const {
@@ -36,17 +34,13 @@ const MealDetails = () => {
     distributor,
     ingredients,
     post_time,
+    like,
     _id,
   } = data.data;
-  const mylike=totallike.filter(item=>item._id===_id)
-  console.log(mylike);
-  const mycard=card.filter(item=>item._id===_id)
- const reviews= mealreview.filter((i) => i.reviewId === _id)
- 
 
-const mylikeCount=mylike.map(item=>item.like);
+  const mycard = card.filter((item) => item._id === _id);
+  const reviews = mealreview.filter((i) => i.reviewId === _id);
 
- 
   const handlereview = async (e) => {
     e.preventDefault();
 
@@ -58,8 +52,8 @@ const mylikeCount=mylike.map(item=>item.like);
     const date = new Date().toLocaleDateString();
 
     const mealreviewData = {
-      likeCount:mycard.map(i=>i.like),
-      reviewCount:reviews.length+1,
+      likeCount: mycard.map((i) => i.like),
+      reviewCount: reviews.length + 1,
       title,
       review,
       email,
@@ -80,31 +74,26 @@ const mylikeCount=mylike.map(item=>item.like);
       });
       e.target.review.value = "";
       refetch();
-
     }
   };
   const handleLikeCount = async (id) => {
-    setBg(!bg)
-   
-    likerefetch()
-    setLikeCount(+ 1);
-    const likedata={
-      email:user?.email,
-      mealid:_id,
-      like:likeCount
-    }
-   
-    likerefetch()
+    setBg(!bg);
+    setLikeCount(+1);
+    refetch();
+    const likedata = {
+      email: user?.email,
+      mealid: _id,
+      like: likeCount,
+    };
     const { data } = await axiosCommon.patch(`/like/${id}`, likedata);
-
   };
 
   const handlemealreauest = async (e) => {
-    const mealReqData={
-      email:user?.email,
-      e
-    }
-   
+    const mealReqData = {
+      email: user?.email,
+      e,
+    };
+
     Swal.fire({
       title: "Are you sure?",
       text: "the mill will be added to request meal!",
@@ -124,17 +113,16 @@ const mylikeCount=mylike.map(item=>item.like);
           });
         }
       }
-      
     });
   };
   return (
     <div className="mt-28 ">
-      <div className="">
+      <div className=" max-w-4xl mx-auto">
         <div className=" px-4">
-          <figure className=" rounded-lg   lg:w-2/5 mx-auto">
+          <figure className=" rounded-lg   w-full mx-auto">
             <img className=" rounded-lg w-full" src={image} alt="Album" />
           </figure>
-          <div className="card-body lg:w-1/2 mx-auto">
+          <div className="card-body  mx-auto">
             <div className=" flex justify-between items-center ">
               <strong>category-{category}</strong>
               <strong>
@@ -143,16 +131,16 @@ const mylikeCount=mylike.map(item=>item.like);
               </strong>
 
               <button
-              onClick={()=>handleLikeCount(_id)}
-               disabled={!user || bg}>
+                onClick={() => handleLikeCount(_id)}
+                disabled={!user || bg}
+              >
                 <BiLike
-                  
                   className={`cursor-pointer  lg:mr-8 ${
                     bg ? "text-blue-500  " : ""
                   } ${!user && "cursor-not-allowed"}`}
                   size={70}
                 />
-                <span className="flex gap-1 justify-start">Like {mycard.map(i=><span>{i.like}</span>)}</span>
+                <span className="flex gap-1 justify-start">Like {like}</span>
                 {!user && <p>login first to like this</p>}
               </button>
             </div>
@@ -197,7 +185,7 @@ const mylikeCount=mylike.map(item=>item.like);
 
                 <form onSubmit={handlereview}>
                   <textarea
-                  required
+                    required
                     className="w-full mt-4 border-2 border-slate-300 rounded-md textarea textarea-info p-4"
                     name="review"
                     id=""

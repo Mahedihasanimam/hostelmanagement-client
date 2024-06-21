@@ -10,7 +10,7 @@ const UseAxiosSecure = () => {
   const {logout}=UseAuth()
   AxiosSecure.interceptors.request.use(function(config){
     const token=localStorage.getItem('accesstoken')
-    console.log('request stop by interseptors',token);
+ 
     config.headers.authorization=`Bearer ${token}`
     return config
   },function(error){
@@ -21,7 +21,7 @@ const UseAxiosSecure = () => {
     return response;
   },async(error)=> {
     const status=error.response.status
-    console.log('status code error in the interseptor',status);
+    
     // if(status===302){
     //   navigate('/login')
     // }

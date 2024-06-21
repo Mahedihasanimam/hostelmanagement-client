@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import UseAxiosSecure from "../../../../hooks/UseAxiosSecure";
-import { Link } from "react-router-dom";
-import { RiDeleteBin6Line } from "react-icons/ri";
-import { CiEdit } from "react-icons/ci";
+import Swal from "sweetalert2";
+import { axiosCommon } from "../../../../hooks/UseAxiosCommon";
+
 
 
 const Upcomming = () => {
@@ -14,7 +14,33 @@ const Upcomming = () => {
             return data
         }
     })
-    console.log(upcommingmeals);
+
+
+    const handlePublish=async(updata)=>{
+      
+    Swal.fire({
+      title: "Are you sure?",
+      text: "do you want to add this meal to all meal? ",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Add it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const {data}=await AxiosSecure.post('/addmeal',updata)
+        console.log(data);
+        if (data.acknowledged) {
+          Swal.fire({
+            title: "Added!",
+            text: "Your meal has been Added to all meal.",
+            icon: "success",
+          });
+        }
+      }
+      
+    });
+    }
     return (
         <div>
         <div className="overflow-x-auto min-h-screen my-8 px-4">
@@ -22,12 +48,12 @@ const Upcomming = () => {
             {/* head */}
             <thead className="bg-blue-100 text-black ">
               <tr>
-                <th>title</th>
-                <th>like</th>
-                <th>review</th>
-                <th>distributor</th>
-                <th></th>
-                <th></th>
+                <th>Title</th>
+                <th>Like</th>
+                <th>Review</th>
+                <th>Distributor</th>
+                <th>Action</th>
+              
               </tr>
             </thead>
             <tbody>
@@ -40,22 +66,11 @@ const Upcomming = () => {
                   <td>{reco.review ||'no review found' }</td>
                   <td>{reco.distributor || 'not found'}</td>
                     <td>
-                  <Link to={`/details/${reco._id}`}>
-                   <button className='btn btn-sm rounded-full bg-blue-500 text-white  '>ViewMeal</button>
-                  </Link>
-                  
+                 
+                   <button onClick={()=>handlePublish(reco)} className='btn btn-sm rounded-full bg-blue-500 text-white  '>Publish</button>
                     </td>
                   
-                    <td>
-                      <button onClick={()=>handlemealDelete(reco._id)} className="btn btn-ghost ">
-                          <RiDeleteBin6Line size={25}/>
-                         
-                      </button>
-                      <Link to={`/dashboard/updatemeal/${reco._id}`} className="btn btn-ghost ">
-                          <CiEdit size={25}/>
-                         
-                      </Link>
-                    </td>
+                 
                
                 </tr>
               ))}

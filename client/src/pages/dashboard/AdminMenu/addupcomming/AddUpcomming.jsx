@@ -25,6 +25,7 @@ const AddUpcomming = () => {
       const post_time = data.post_time
       const ingredients = data.ingredients
       const details = data.details
+      const likes=data.likes
     
      
       const formData = new FormData();
@@ -38,6 +39,7 @@ const AddUpcomming = () => {
         const upcommingmealinfo = {
         
           category,
+          likes,
           post_time,
           title,
           price,
