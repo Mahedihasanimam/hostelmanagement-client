@@ -45,14 +45,14 @@ const AuthProvider = ({ children }) => {
         const loggedUser={email:userEmail}
       setuser(currentUser);
       setLoder(false);
-      
+      console.log(currentUser);
       if(currentUser){
       
-        axiosCommon.post(`/jwt`, loggedUser, {
-            withCredentials: true,
-          })
+        axiosCommon.post(`/jwt`, loggedUser,)
         .then(res=>{
+          console.log('responsd data',res.data.token,loggedUser);
            if(res.data.token){
+            
             localStorage.setItem('accesstoken',res.data.token)
            }
         })

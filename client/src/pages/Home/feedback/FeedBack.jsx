@@ -1,11 +1,14 @@
+import Swal from "sweetalert2";
 import MyButton from "../../../components/MyButton";
 import UseAuth from "../../../hooks/UseAuth";
+import useAxiosCommon from "../../../hooks/UseAxiosCommon";
 
 
 const FeedBack = () => {
     const {user}=UseAuth()
+    const axiosCommon=useAxiosCommon()
 
-    const handlefeedback=(e)=>{
+    const handlefeedback=async(e)=>{
         e.preventDefault()
        
         const form=e.target
@@ -19,6 +22,23 @@ const FeedBack = () => {
 
         }
         
+        try{
+            const {data}=await axiosCommon.post('/user/feedback',feedbackdata)
+            if (data.acknowledged) {
+                Swal.fire({
+                  position: "center",
+                  icon: "success",
+                  title: "yor feedback added!!",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                form.reset()
+              
+              }
+        }
+        catch(err){
+            console.log(err);
+        }
        
     }
     return (
@@ -109,7 +129,7 @@ const FeedBack = () => {
                             <textarea required className="block w-full h-32 px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md md:h-48 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" name="message" placeholder="Message"></textarea>
                         </div>
 
-                        <button className="btn btn-primary " type="submit">submit</button>
+                        <MyButton label={'sent feedback'}/>
                     </form>
                 </div>
             </div>

@@ -60,6 +60,7 @@ formData.append("image", image);
           showConfirmButton: false,
           timer: 1500,
         });
+        
        }
        }catch(err){console.log(err);}
     

@@ -17,6 +17,9 @@ const Sidebar = () => {
   const { logout } = UseAuth();
   const [isActive, setActive] = useState(true);
   const [isAdmin,isLoading] = UseAdmin();
+  console.log(isAdmin);
+
+  
   const handleToggle = () => {
     setActive(!isActive);
   };
