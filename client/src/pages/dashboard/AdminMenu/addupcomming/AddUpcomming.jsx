@@ -40,7 +40,6 @@ const AddUpcomming = () => {
         
           category,
           likes,
-          post_time,
           title,
           price,
           image:data.data.display_url,

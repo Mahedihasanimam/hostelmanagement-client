@@ -10,26 +10,13 @@ import UserMenu from "./userMenu/UserMenu";
 import AdminMenu from "./AdminMenu/AdminMenu";
 import { RxCross2 } from "react-icons/rx";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { useQuery } from "@tanstack/react-query";
 import { FaHome } from "react-icons/fa";
 import UseAdmin from "../../hooks/UseAdmin";
-import { ImSpinner9 } from "react-icons/im";
+
 const Sidebar = () => {
   const { logout } = UseAuth();
-  // const [toggle, setToggle] = useState(false)
   const [isActive, setActive] = useState(true);
   const [isAdmin,isLoading] = UseAdmin();
- 
-
-
-  if(isLoading){
-    return <ImSpinner9
-    size={40}
-    className=" animate-spin absolute top-1/2 left-1/2 text-[#60A5FA]  "
-  />
-  }
-
-
   const handleToggle = () => {
     setActive(!isActive);
   };
