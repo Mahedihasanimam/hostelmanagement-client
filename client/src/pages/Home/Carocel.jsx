@@ -37,11 +37,11 @@ export default function Carocel() {
         className="mySwiper"
       >
         <SwiperSlide>
-            <Slider text={'Discover diverse options to suit your needs with our wide selection of alternative products available for you to explore'} image={img1} title={"Effortless Meal and Review Management for University Hostels"
+            <Slider text={'Discover diverse options to suit your needs with our wide selection of alternative products available for you to explore'} image={img1} title={"Effortless Meal & Review Management"
   } />
         </SwiperSlide>
         <SwiperSlide>
-            <Slider text={'Discover diverse options to suit your needs with our wide selection of alternative products available for you to explore'} image={img2} title={" Hostel Management for a Seamless Student Experience"  } />
+            <Slider text={'Discover diverse options to suit your needs with our wide selection of alternative products available for you to explore'} image={img2} title={"Seamless Student Hostel Management"  } />
         </SwiperSlide>
         <SwiperSlide>
             <Slider text={'Discover a myriad of alternative products tailored to your preferences and needs on our platform. Explore your options today!'}  image={img3} title={"Find alll management solution Here!"} />

@@ -1,17 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
-import UseAxiosCommon from "./UseAxiosCommon";
-import UseAxiosSecure from "./UseAxiosSecure";
-import { useState } from "react";
+import useAxiosCommon from "./UseAxiosCommon";
+
 
 
 
 const UseCard = () => {
    
-    const AxiosSecure=UseAxiosSecure()
+    const axiosCommon=useAxiosCommon()
     const {data:card=[],isLoading,fetchNextPage,refetch:cardreftch}=useQuery({
         queryKey:['card'],
         queryFn:async()=>{
-            const res=await AxiosSecure.get(`/meals`)
+            const res=await axiosCommon.get(`/meals`)
             return res.data
         }
     })

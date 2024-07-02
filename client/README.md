@@ -24,6 +24,6 @@ Develop a Hostel Management system using the MERN stack for efficient student me
 - Admin Email: mahedi@gmail.com
 - Admin Password: Mahedi60
 - Live Site Link: https://hostelmanagement-d2b48.web.app
-- Client Repository: https://github.com/programming-hero-web-course1/b9a12-client-side-Mahedihasanimam
-- Server Repository: https://github.com/programming-hero-web-course1/b9a12-server-side-Mahedihasanimam
+
+- Server Repository:https://github.com/Mahedihasanimam/hostelmanagement-server
 

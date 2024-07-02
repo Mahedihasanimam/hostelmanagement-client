@@ -1,4 +1,4 @@
-import { Navigate, useLocation } from "react-router-dom";
+
 import UseAuth from "../hooks/UseAuth";
 import UseAdmin from "../hooks/UseAdmin";
 import { ImSpinner9 } from "react-icons/im";
@@ -6,7 +6,6 @@ import { ImSpinner9 } from "react-icons/im";
 
 const AdminRoute = ({children}) => {
    const {user,loder}=UseAuth()
-   const location=useLocation()
    const [isAdmin,isLoading]=UseAdmin()
    if(loder || isLoading){
     return <ImSpinner9
@@ -17,9 +16,7 @@ const AdminRoute = ({children}) => {
   if(user && isAdmin){
     return children
  }
- else{
-    return <Navigate state={location?.pathname}  to={'/login'} ></Navigate>
- }
+ 
 };
 
 export default AdminRoute;
